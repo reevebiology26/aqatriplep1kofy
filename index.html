@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQA Triple Biology Paper 1 Masterclass</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ko-fi Widget Script -->
+    <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --primary: #10b981; /* emerald-500 */
+            --primary-dark: #047857; /* emerald-700 */
+        }
+        body {
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes streakPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3) rotate(10deg); filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5)); }
+            100% { transform: scale(1) rotate(0); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            50% { transform: translateX(5px) rotate(1deg); }
+            75% { transform: translateX(-5px) rotate(-1deg); }
+        }
+        @keyframes pulse-record {
+            0%, 100% { color: #64748b; background-color: #f1f5f9; }
+            50% { color: #ef4444; background-color: #fee2e2; border-color: #fca5a5; }
+        }
+        @keyframes lockInZoom {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        .animate-streak-pop { animation: streakPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .animate-record { animation: pulse-record 1.5s infinite; color: #ef4444; }
+        .animate-lock-in { animation: lockInZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        .streak-glow {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            border-color: rgba(16, 185, 129, 0.8);
+        }
+
+        /* Hide Scrollbar but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active {
+            border-bottom-width: 4px;
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            background-color: #ecfdf5; /* emerald-50 */
+        }
+        
+        .activity-content { display: none; }
+        .activity-content.active { display: block; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen overflow-hidden" id="main-body">
+
+    <!-- LOCKED IN OVERLAY -->
+    <div id="locked-in-overlay" class="fixed inset-0 bg-slate-900/95 z-[100] hidden items-center justify-center flex-col text-center backdrop-blur-md">
+        <div id="locked-in-content" class="scale-0 opacity-0 transition-all duration-500">
+            <i class="ph-duotone ph-lock-key text-[10rem] text-emerald-400 mb-4 drop-shadow-[0_0_30px_rgba(52,211,153,0.8)]"></i>
+            <h1 class="font-heading text-5xl md:text-7xl text-white tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">LOCKED IN!</h1>
+            <p class="text-emerald-400 mt-4 text-xl md:text-2xl font-bold tracking-widest uppercase">Mastery Achieved</p>
+        </div>
+    </div>
+
+    <!-- SPLASH SCREEN (Main Menu - Compact Layout) -->
+    <div id="splash-screen" class="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center transition-opacity duration-700 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-50 via-white to-blue-50 p-2 overflow-y-auto">
+        <div class="text-center flex flex-col items-center w-full max-w-4xl my-auto py-6">
+            <div class="flex gap-2 mb-2">
+                <i class="ph-duotone ph-microscope text-4xl sm:text-5xl text-emerald-500"></i>
+                <i class="ph-duotone ph-dna text-4xl sm:text-5xl text-blue-500"></i>
+            </div>
+            <h1 class="font-heading text-2xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mb-2 leading-tight">
+                AQA Triple Biology <span class="text-emerald-600 block sm:inline">Paper 1</span>
+            </h1>
+            <p class="text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-2 bg-emerald-100/50 px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Created by Mr A Reeve | Higher Tier</p>
+            
+            <!-- Ko-fi Widget Container for Splash Screen -->
+            <div id="kofi-splash-container" class="my-2"></div>
+            
+            <!-- Unit Selection Grid (Compact to fit on one screen) -->
+            <div class="w-full text-left px-2 max-w-3xl mx-auto mt-2">
+                <div class="flex items-center gap-2 mb-2"><i class="ph-bold ph-leaf text-blue-500 text-lg"></i> <h2 class="text-sm sm:text-base font-bold text-slate-700 border-b-2 border-blue-200 flex-grow pb-0.5">Triple Science Topics</h2></div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4" id="grid-paper2"></div>
+                
+                <div class="flex items-center gap-2 mb-2 mt-4"><i class="ph-bold ph-calculator text-amber-500 text-lg"></i> <h2 class="text-sm sm:text-base font-bold text-slate-700 border-b-2 border-amber-200 flex-grow pb-0.5">All Papers</h2></div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 flex-grow" id="grid-skills"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER & NAV -->
+    <header class="bg-white shadow-sm z-10 sticky top-0 border-b border-slate-200 hidden" id="app-header">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <button onclick="returnToMenu()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition-colors shrink-0 flex items-center gap-2 font-bold shadow-sm border border-slate-200">
+                    <i class="ph-bold ph-arrow-left text-xl"></i> <span class="hidden sm:inline">Main Menu</span>
+                </button>
+                <div id="header-icon-container" class="bg-emerald-100 p-2 rounded-lg shrink-0"><i id="header-icon" class="ph-bold ph-microscope text-2xl text-emerald-600"></i></div>
+                <div class="truncate">
+                    <h1 id="header-unit-title" class="font-heading text-xl font-bold text-slate-800 leading-none truncate">Unit Title</h1>
+                    <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider truncate">AQA Triple Science <span class="text-slate-300 mx-1">|</span> <span class="text-emerald-600 font-bold">Created by Mr A Reeve</span></p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <!-- Ko-fi Widget Container for Banner -->
+                <div id="kofi-banner-container" class="scale-90 origin-right"></div>
+
+                <!-- Dynamic Streak Counter -->
+                <div id="streak-banner" class="bg-slate-100 text-slate-700 font-bold px-4 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 shrink-0 transition-all duration-300">
+                    <span id="streak-emoji" class="text-2xl -my-2 drop-shadow-sm transition-transform duration-300">🦠</span>
+                    <span class="text-sm tracking-wide uppercase font-semibold text-slate-500">Streak:</span>
+                    <span id="streak-counter" class="text-xl font-black text-emerald-600">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Horizontal Scrollable Activity Tabs -->
+        <div class="flex overflow-x-auto bg-white scrollbar-hide border-t border-slate-100 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.02)]">
+            <div class="max-w-7xl mx-auto w-full flex px-2" id="activity-tabs">
+                <!-- Tabs generated dynamically by JS based on unit type -->
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-5xl mx-auto w-full p-4 sm:p-6 pb-32 hidden relative overflow-y-auto" id="main-content">
+        
+        <!-- 1. Mix & Match -->
+        <div id="tab-match" class="activity-content animate-fade-in">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="ph-fill ph-arrows-merge text-emerald-500"></i> Terminology Match <span class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded border border-emerald-200 ml-2">Round <span id="match-batch-label">1</span> of 2</span></h3>
+                        <p class="text-slate-500 text-sm mt-1">Tap a term, then tap its definition to link them.</p>
+                    </div>
+                    <span class="text-sm font-bold bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full shrink-0 flex items-center gap-2">
+                        <span><span id="match-score">0</span> / <span id="match-total">16</span> Matched</span>
+                        <button onclick="resetMatch()" class="bg-emerald-200 hover:bg-emerald-300 p-1.5 rounded-md transition-colors shadow-sm ml-2" title="Reset Match"><i class="ph-bold ph-arrows-clockwise text-emerald-800"></i></button>
+                    </span>
+                </div>
+                <div id="match-complete" class="hidden bg-emerald-50 border-2 border-emerald-500 text-emerald-700 p-8 rounded-xl text-center mb-6 shadow-sm">
+                    <i class="ph-fill ph-check-circle text-5xl mb-2"></i>
+                    <h4 class="font-heading text-2xl font-bold">Perfect Match!</h4>
+                    <p class="font-medium">You have mastered the vocabulary for this unit.</p>
+                </div>
+                <div id="match-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3" id="match-questions"></div>
+                    <div class="space-y-3" id="match-answers"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. MCQ Engine -->
+        <div id="tab-mcq" class="activity-content animate-fade-in">
+            <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-700 text-white max-w-3xl mx-auto">
+                <div class="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-700 pb-4">
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold flex items-center gap-2"><i class="ph-fill ph-list-checks text-blue-400"></i> Concept Quiz</h3>
+                        <p class="text-slate-400 text-sm mt-1" id="mcq-subtitle">Incorrect answers return to the queue.</p>
+                    </div>
+                    <div class="text-left sm:text-right shrink-0">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider">Mastery Progress</div>
+                        <div class="text-3xl font-black text-blue-400 mt-1" id="mcq-progress">0 / 0</div>
+                    </div>
+                </div>
+                
+                <div id="mcq-complete" class="hidden text-center py-10">
+                    <i class="ph-duotone ph-trophy text-7xl text-amber-400 mb-4 animate-bounce"></i>
+                    <h4 class="font-heading text-3xl font-bold text-white mb-2">100% Mastery Achieved</h4>
+                    <p class="text-slate-300">You successfully answered all concepts in this unit.</p>
+                </div>
+                
+                <!-- RETRY SCREEN -->
+                <div id="mcq-retry-screen" class="hidden text-center py-10">
+                    <i class="ph-duotone ph-arrow-counter-clockwise text-7xl text-amber-400 mb-4"></i>
+                    <h4 class="font-heading text-3xl font-bold text-white mb-2">Review Required</h4>
+                    <p class="text-slate-300 mb-6">You have <span id="mcq-retry-count" class="font-bold text-white text-xl">0</span> incorrect answers to review.</p>
+                    <button onclick="startMCQRetry()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors inline-flex items-center gap-2">
+                        <i class="ph-bold ph-arrows-clockwise text-xl"></i> Retry Wrong Answers
+                    </button>
+                </div>
+                
+                <div id="mcq-container">
+                    <h4 class="text-lg sm:text-xl font-medium mb-8 leading-relaxed text-slate-100" id="mcq-question">Loading...</h4>
+                    <div class="space-y-4" id="mcq-options"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Long Answers -->
+        <div id="tab-long" class="activity-content animate-fade-in">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h3 class="font-heading text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="ph-fill ph-pen-nib text-amber-500"></i> The Book of Knowledge</h3>
+                <p class="text-slate-500 text-sm mt-1">Type or dictate your answers. Mark yourself honestly against the perfect model to secure your score.</p>
+            </div>
+            <div id="long-list" class="space-y-8"></div>
+        </div>
+
+        <!-- 4. Maths Skills -->
+        <div id="tab-maths" class="activity-content animate-fade-in">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 max-w-4xl mx-auto">
+                <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="ph-fill ph-calculator text-blue-500"></i> Applied Skills</h3>
+                        <p class="text-slate-500 text-sm mt-1">Calculate the answers. Numbers only.</p>
+                    </div>
+                    <div class="text-3xl font-black text-blue-600 bg-blue-50 px-5 py-2 rounded-xl border border-blue-200 shrink-0"><span id="maths-score">0</span> / 10</div>
+                </div>
+                <div id="maths-list" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- 5. Dashboard / Report Gen -->
+        <div id="tab-report" class="activity-content animate-fade-in">
+            <div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-slate-200 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                    <i id="dash-bg-icon" class="ph-fill ph-medal text-[15rem]"></i>
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 border-b border-slate-100 pb-8 relative z-10">
+                    <div class="text-center md:text-left">
+                        <h3 class="font-heading text-3xl font-bold text-slate-800 mb-2">Unit Mastery</h3>
+                        <div class="text-6xl font-black text-emerald-600" id="dash-percentage">0%</div>
+                        <p class="text-slate-500 font-medium mt-2 max-w-sm" id="dash-feedback">Complete all activities in this unit to uncover your fate.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 relative z-10" id="dash-standard-stats">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div class="text-sm font-bold text-slate-500 uppercase flex items-center gap-2"><i class="ph-fill ph-arrows-merge text-emerald-500 text-lg"></i> Match Up</div>
+                        <div class="mt-3 flex items-end justify-between">
+                            <div class="text-4xl font-black text-slate-800"><span id="dash-score-match">0</span> <span class="text-xl text-slate-400 font-medium" id="dash-total-match">/ 8</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div class="text-sm font-bold text-slate-500 uppercase flex items-center gap-2"><i class="ph-fill ph-list-checks text-blue-500 text-lg"></i> Quiz Mastery</div>
+                        <div class="mt-3 flex items-end justify-between">
+                            <div class="text-4xl font-black text-slate-800"><span id="dash-score-mcq">0</span> <span class="text-xl text-slate-400 font-medium" id="dash-total-mcq">/ 40</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between sm:col-span-2">
+                        <div class="text-sm font-bold text-slate-500 uppercase flex items-center gap-2"><i class="ph-fill ph-pen-nib text-amber-500 text-lg"></i> The Book of Knowledge (Total)</div>
+                        <div class="mt-3 flex items-end justify-between">
+                            <div class="text-4xl font-black text-slate-800"><span id="dash-score-long">0</span> <span class="text-xl text-slate-400 font-medium" id="dash-total-long">/ 24</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-4 mb-10 relative z-10 hidden" id="dash-maths-stats">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div class="text-sm font-bold text-slate-500 uppercase flex items-center gap-2"><i class="ph-fill ph-calculator text-blue-500 text-lg"></i> Applied Maths Skills</div>
+                        <div class="mt-3 flex items-end justify-between">
+                            <div class="text-4xl font-black text-slate-800"><span id="dash-score-maths">0</span> <span class="text-xl text-slate-400 font-medium">/ 20</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="handleReportClick()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-widest py-4 rounded-xl shadow-lg transition-transform transform hover:-translate-y-1 text-lg flex justify-center items-center gap-3 relative z-10">
+                    <i class="ph-bold ph-files text-2xl"></i> Generate Official Report
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast-message" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-lg z-[70] flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <i id="toast-icon" class="ph-fill ph-info text-xl"></i>
+        <span id="toast-text" class="font-medium">Message</span>
+    </div>
+
+    <!-- NAME ENTRY MODAL -->
+    <div id="name-modal" class="fixed inset-0 bg-slate-900/60 z-[60] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl max-w-sm w-full shadow-2xl relative border-t-8 border-blue-600 animate-fade-in">
+            <h2 class="font-heading text-2xl font-bold text-slate-800 mb-2">Student Verification</h2>
+            <p class="text-slate-500 font-medium mb-6 text-sm">Enter your name for the official report.</p>
+            <input type="text" id="student-name-input" class="w-full p-3 border-2 rounded-xl outline-none transition-colors border-slate-300 focus:border-blue-500 mb-6 bg-slate-50 font-medium text-slate-800" placeholder="e.g. Jane Doe">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeNameModal()" class="px-5 py-2.5 text-slate-500 hover:bg-slate-100 rounded-xl transition-colors font-medium">Cancel</button>
+                <button onclick="saveNameAndShowScorecard()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors font-bold shadow-md flex items-center gap-2">Generate <i class="ph-bold ph-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCORECARD MODAL -->
+    <div id="scorecard-modal" class="fixed inset-0 bg-slate-900/80 z-[60] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl relative border-t-8 border-emerald-500 max-h-[95vh] overflow-y-auto animate-fade-in">
+            <button onclick="closeScorecard()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+                <i class="ph-fill ph-x-circle text-3xl"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="ph-bold ph-check-fat text-3xl text-emerald-600"></i>
+                </div>
+                <h2 class="font-heading text-2xl font-bold text-slate-800">Unit Completion Report</h2>
+                <p class="text-slate-500 font-semibold mt-1 uppercase tracking-wider text-xs">AQA Triple Biology Paper 1</p>
+            </div>
+            
+            <div class="space-y-4 mb-8 text-sm sm:text-base bg-slate-50 p-5 rounded-xl border border-slate-200">
+                <div class="flex justify-between border-b border-slate-200 pb-3">
+                    <span class="text-slate-500 font-bold uppercase tracking-wider text-xs flex items-center gap-2"><i class="ph-fill ph-student text-lg"></i> Student</span>
+                    <span class="font-bold text-slate-800" id="sc-name"></span>
+                </div>
+                <div class="flex justify-between border-b border-slate-200 py-3">
+                    <span class="text-slate-500 font-bold uppercase tracking-wider text-xs flex items-center gap-2"><i class="ph-fill ph-books text-lg"></i> Unit</span>
+                    <span class="font-bold text-slate-800" id="sc-unit"></span>
+                </div>
+                
+                <div id="sc-standard-stats">
+                    <div class="flex justify-between py-2">
+                        <span class="text-slate-600 font-medium">1. Match Up</span>
+                        <span class="font-bold text-slate-800"><span id="sc-match">0</span> <span class="text-slate-400" id="sc-total-match-display">/ 8</span></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-slate-200 pb-3">
+                        <span class="text-slate-600 font-medium">2. Quiz</span>
+                        <span class="font-bold text-slate-800"><span id="sc-mcq">0</span> <span class="text-slate-400">/ <span id="sc-total-mcq">0</span></span></span>
+                    </div>
+                    <div class="flex justify-between pt-3">
+                        <span class="text-slate-600 font-medium">3. Long Answers</span>
+                        <span class="font-bold text-slate-800"><span id="sc-long">0</span> <span class="text-slate-400">/ <span id="sc-total-long">0</span></span></span>
+                    </div>
+                </div>
+
+                <div id="sc-maths-stats" class="hidden">
+                    <div class="flex justify-between py-2">
+                        <span class="text-slate-600 font-medium">Maths Skills</span>
+                        <span class="font-bold text-slate-800"><span id="sc-maths">0</span> <span class="text-slate-400">/ 20</span></span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between pt-6 mt-2 border-t-2 border-slate-200 text-lg items-center">
+                    <span class="font-heading font-bold text-slate-800">Total Score:</span>
+                    <div class="text-right">
+                        <div class="font-black text-emerald-600 text-2xl"><span id="sc-total">0</span> <span class="text-lg text-slate-400">/ <span id="sc-max">0</span></span></div>
+                        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1"><span id="sc-percent">0</span>% Mastery</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center text-xs text-slate-400 font-medium">
+                <p>Generated by AQA Masterclass <span class="text-slate-300 mx-1">&bull;</span> Created by Mr A Reeve</p>
+                <p class="mt-1" id="sc-timestamp"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC & DATA -->
+    <script>
+        /** 
+         * ==========================================
+         * DATA STRUCTURE
+         * ==========================================
+         */
+        const APP_DATA = {
+            t1: { 
+                id: 't1', title: "Cell Biology", icon: "ph-microscope", emoji: "🔬", type: "standard",
+                match: [
+                    {q:"Eukaryotic Cell", a:"Complex cells containing a true nucleus and membrane-bound organelles (e.g., plant and animal cells)."},
+                    {q:"Prokaryotic Cell", a:"Smaller, simpler cells without a nucleus; genetic material is a single DNA loop (e.g., bacteria)."},
+                    {q:"Plasmid", a:"Small rings of extra DNA found in bacterial cells, often containing antibiotic resistance genes."},
+                    {q:"Resolving Power", a:"The ability of a microscope to distinguish between two closely spaced points as separate entities."},
+                    {q:"Electron Microscope", a:"Uses a beam of electrons; has a much higher magnification and resolving power than a light microscope."},
+                    {q:"Binary Fission", a:"Simple cell division used by bacteria to multiply as often as once every 20 minutes."},
+                    {q:"Agar Gel", a:"A jelly-like substance placed in petri dishes acting as a culture medium for growing microorganisms."},
+                    {q:"Zone of Inhibition", a:"A clear area around an antibiotic disc on an agar plate where bacteria have been killed."},
+                    {q:"Mitosis", a:"Stage of the cell cycle where the nucleus divides to form two identical daughter cells."},
+                    {q:"Stem Cell", a:"An undifferentiated cell capable of giving rise to many more cells of the same or different types."},
+                    {q:"Therapeutic Cloning", a:"Producing an embryo with the same genes as the patient to harvest stem cells that won't be rejected."},
+                    {q:"Meristem", a:"Tissue in plants found at the tips of shoots and roots containing plant stem cells."},
+                    {q:"Diffusion", a:"The net movement of particles from an area of higher concentration to an area of lower concentration."},
+                    {q:"Osmosis", a:"The diffusion of water from a dilute solution to a concentrated solution through a partially permeable membrane."},
+                    {q:"Active Transport", a:"Moves substances from a more dilute solution to a more concentrated solution, requiring energy from respiration."},
+                    {q:"Specialised Cell", a:"A cell that has differentiated to perform a specific function (e.g., sperm, root hair cell)."}
+                ],
+                mcq: [
+                    { q: "Which of the following is found in plant cells but NEVER in animal cells?", options: ["Cellulose cell wall", "Mitochondria", "Ribosomes", "Cell membrane"], ans: 0 },
+                    { q: "Why do electron microscopes provide more detailed images of cell organelles than light microscopes?", options: ["They have a much higher resolving power and magnification", "They use colored dyes to stain the cells", "They can view living cells in real-time", "They are cheaper and easier to use"], ans: 0 },
+                    { q: "What is the function of ribosomes?", options: ["Protein synthesis", "Aerobic respiration", "Photosynthesis", "Storing genetic information"], ans: 0 },
+                    { q: "By which process do root hair cells absorb mineral ions from a dilute soil solution?", options: ["Active transport", "Osmosis", "Diffusion", "Transpiration"], ans: 0 },
+                    { q: "What happens to a plant cell placed in a highly concentrated sugar solution?", options: ["Water moves out of the cell by osmosis, causing it to become plasmolysed", "Water moves into the cell by osmosis, causing it to become turgid", "Sugar moves into the cell by active transport", "The cell bursts"], ans: 0 },
+                    { q: "In therapeutic cloning, why are the stem cells not rejected by the patient's body?", options: ["They contain the exact same genetic information as the patient", "They are injected directly into the blood", "They are plant stem cells", "They do not have a nucleus"], ans: 0 },
+                    { q: "At what maximum temperature should microorganisms be incubated in school laboratories?", options: ["25°C to reduce the risk of growing harmful human pathogens", "37°C to encourage maximum growth", "10°C to keep them alive longer", "100°C to sterilize the agar"], ans: 0 },
+                    { q: "How is the DNA arranged in a prokaryotic cell?", options: ["As a single DNA loop freely suspended in the cytoplasm and small rings called plasmids", "Enclosed within a distinct nucleus", "Wrapped around proteins called chromosomes", "Inside the mitochondria"], ans: 0 },
+                    { q: "What must happen before a cell can divide by mitosis?", options: ["It must grow and replicate its DNA and subcellular structures (like mitochondria)", "It must divide its cytoplasm", "It must differentiate into a specialised cell", "It must undergo active transport"], ans: 0 },
+                    { q: "How do you calculate the size of a real object under a microscope?", options: ["Image size divided by magnification", "Magnification multiplied by image size", "Image size divided by objective lens power", "Eyepiece lens multiplied by objective lens"], ans: 0 },
+                    { q: "Why are stem cells from human embryos considered more useful than adult stem cells?", options: ["Embryonic stem cells can differentiate into ANY type of human cell; adult stem cells are limited", "Embryonic stem cells do not require a donor", "Adult stem cells are always rejected", "Embryonic stem cells are found in the bone marrow"], ans: 0 },
+                    { q: "Which adaptation drastically increases the rate of diffusion in the small intestine?", options: ["Millions of villi providing a massive surface area", "A thick layer of muscle tissue", "A slow blood supply", "Lack of mitochondria"], ans: 0 },
+                    { q: "When investigating the effect of antibiotics, how is the effectiveness measured?", options: ["By calculating the area of the clear zone of inhibition using πr²", "By weighing the petri dish before and after", "By counting the number of individual bacteria", "By measuring the height of the bacterial colony"], ans: 0 },
+                    { q: "Which statement best describes active transport?", options: ["Movement of particles against the concentration gradient, requiring energy from respiration", "Movement of particles down a concentration gradient passively", "Movement of water across a partially permeable membrane", "Movement of gases in the alveoli"], ans: 0 },
+                    { q: "What is the role of the permanent vacuole in a plant cell?", options: ["It is filled with cell sap and helps keep the cell turgid", "It controls the activities of the cell", "It is where photosynthesis occurs", "It synthesizes proteins"], ans: 0 },
+                    { q: "Why do sperm cells contain a large number of mitochondria?", options: ["To transfer the energy needed for the tail to swim to the egg", "To break down the egg's outer layer", "To carry genetic information", "To increase their surface area"], ans: 0 },
+                    { q: "What is the primary function of mitosis in multicellular organisms?", options: ["Growth, repair, and replacement of damaged cells", "Production of gametes (sperm and egg cells)", "To introduce genetic variation", "To halve the number of chromosomes"], ans: 0 },
+                    { q: "Which structure allows bacteria to develop antibiotic resistance rapidly?", options: ["Plasmids, which can be transferred between bacteria", "The cell wall", "The flagella", "The cytoplasm"], ans: 0 },
+                    { q: "What technique is used to ensure bacterial cultures are not contaminated?", options: ["Aseptic technique, such as passing the inoculating loop through a flame", "Incubating at 37°C", "Using a light microscope", "Adding sugar to the agar"], ans: 0 },
+                    { q: "How are plant meristem cells utilised commercially?", options: ["To produce clones of plants quickly and economically, saving rare species", "To cure human diseases", "To produce biofuels directly", "To make animal stem cells"] }
+                ],
+                long: [
+                    { q: "Describe how to prepare an uncontaminated culture of bacteria using aseptic technique. (4 marks)", model: "1. Sterilise petri dishes and culture media to kill unwanted microorganisms.\n2. Pass the inoculating loop through a roaring Bunsen flame to sterilise it.\n3. Keep the petri dish lid taped (but not fully sealed) to prevent microorganisms from the air entering, whilst allowing oxygen in.\n4. Incubate the plate upside down to prevent condensation dripping onto the agar.", maxMarks: 4 },
+                    { q: "Compare the structure of a eukaryotic cell with a prokaryotic cell. (4 marks)", model: "1. Eukaryotic cells are much larger and more complex than prokaryotic cells.\n2. Eukaryotes enclose their genetic material in a nucleus, whereas prokaryotes have a single DNA loop free in the cytoplasm.\n3. Prokaryotes may contain small rings of DNA called plasmids, which eukaryotes lack.\n4. Eukaryotes have membrane-bound organelles (like mitochondria), which are absent in prokaryotes.", maxMarks: 4 },
+                    { q: "Explain the process of therapeutic cloning and its medical advantages. (4 marks)", model: "1. An embryo is produced with the exact same genes as the patient.\n2. Stem cells from this embryo are harvested and cultured.\n3. Because they have the same DNA, the patient's immune system will not reject them.\n4. These cells can be stimulated to differentiate into any cell type to replace damaged tissue (e.g., in paralysis or diabetes).", maxMarks: 4 },
+                    { q: "Describe the three main stages of the cell cycle. (3 marks)", model: "1. Stage 1: The cell grows and replicates its DNA and subcellular structures (like mitochondria/ribosomes).\n2. Stage 2 (Mitosis): One set of chromosomes is pulled to each end of the cell and the nucleus divides.\n3. Stage 3: The cytoplasm and cell membrane divide to form two identical daughter cells.", maxMarks: 3 },
+                    { q: "Explain how root hair cells are adapted for their specific function. (3 marks)", model: "1. They have a long protrusion that greatly increases the surface area for the absorption of water and minerals.\n2. They have a large permanent vacuole that speeds up the movement of water by osmosis.\n3. They contain many mitochondria to transfer the energy required for active transport of mineral ions.", maxMarks: 3 },
+                    { q: "Describe how to use a light microscope to view an onion epidermal cell clearly. (4 marks)", model: "1. Peel a thin layer of epidermis from an onion and place it flat on a glass slide.\n2. Add a drop of iodine solution to stain the sub-cellular structures so they are visible.\n3. Carefully lower a coverslip using a mounted needle to avoid trapping air bubbles.\n4. View under the lowest objective lens first, using the coarse focusing dial to bring it into focus.", maxMarks: 4 },
+                    { q: "Explain the difference between diffusion and active transport. (3 marks)", model: "1. Diffusion is the movement of particles down a concentration gradient (high to low); active transport moves particles against the gradient (low to high).\n2. Diffusion is a passive process; active transport requires energy.\n3. The energy for active transport is provided by cellular respiration.", maxMarks: 3 },
+                    { q: "Explain how the alveoli in the lungs are adapted to maximize the rate of diffusion. (4 marks)", model: "1. There are millions of alveoli, providing a massive surface area.\n2. The alveolar walls are only one cell thick, creating a very short diffusion pathway.\n3. They have a massive network of capillaries to maintain a steep concentration gradient.\n4. They are moist, allowing gases to dissolve before diffusing.", maxMarks: 4 },
+                    { q: "A piece of potato is placed in concentrated salt solution. Explain what happens to its mass. (3 marks)", model: "1. The mass of the potato piece will decrease.\n2. The concentration of water is higher inside the potato cells than in the salt solution.\n3. Water moves out of the potato cells into the solution by osmosis across the partially permeable membrane.", maxMarks: 3 },
+                    { q: "Discuss the ethical and practical issues associated with using embryonic stem cells. (3 marks)", model: "1. Ethical: Some people believe that embryos are potential human life and should not be destroyed for research.\n2. Practical: There is a risk of embryonic stem cells transferring viral infections to the patient.\n3. Practical: Embryonic stem cells may mutate and divide uncontrollably, potentially causing cancer.", maxMarks: 3 }
+                ]
+            },
+            t2: { 
+                id: 't2', title: "Organisation", icon: "ph-heartbeat", emoji: "🫀", type: "standard",
+                match: [
+                    {q:"Tissue", a:"A group of cells with a similar structure and function working together."},
+                    {q:"Organ", a:"An aggregation of different tissues working together to perform a specific function."},
+                    {q:"Amylase", a:"A carbohydrase enzyme produced in salivary glands and pancreas that breaks down starch into sugars."},
+                    {q:"Protease", a:"Enzyme produced in stomach, pancreas, and small intestine that breaks proteins down into amino acids."},
+                    {q:"Lipase", a:"Enzyme produced in pancreas and small intestine that breaks lipids down into glycerol and fatty acids."},
+                    {q:"Bile", a:"Alkaline fluid made in liver and stored in gall bladder; emulsifies fat and neutralises stomach acid."},
+                    {q:"Lock and Key Theory", a:"Model explaining enzyme action: the substrate fits perfectly into the specific active site of the enzyme."},
+                    {q:"Denatured", a:"When extremes of pH or temperature change the shape of the active site so the substrate no longer fits."},
+                    {q:"Pacemaker", a:"A group of cells in the right atrium wall that control the resting heart rate."},
+                    {q:"Coronary Heart Disease", a:"When fatty material builds up inside the coronary arteries, narrowing them and reducing blood flow to the heart muscle."},
+                    {q:"Stent", a:"A wire mesh tube inserted into blocked coronary arteries to keep them open."},
+                    {q:"Statins", a:"Drugs that reduce blood cholesterol levels, slowing the rate of fatty material deposit."},
+                    {q:"Transpiration", a:"The loss of water vapor from the leaves of a plant through the stomata."},
+                    {q:"Translocation", a:"The movement of dissolved sugars from leaves to the rest of the plant through the phloem."},
+                    {q:"Xylem", a:"Hollow tubes of dead cells strengthened by lignin; transports water and mineral ions upwards."},
+                    {q:"Phloem", a:"Tubes of elongated living cells with pores in the end walls; transports dissolved sugars in both directions."}
+                ],
+                mcq: [
+                    { q: "What represents the 'lock' and the 'key' in the lock and key theory of enzyme action?", options: ["The active site is the lock, the substrate is the key", "The substrate is the lock, the active site is the key", "The enzyme is the key, the cell membrane is the lock", "Bile is the key, lipids are the lock"], ans: 0 },
+                    { q: "Why is bile essential for lipid digestion if it is not an enzyme?", options: ["It emulsifies large lipid drops into smaller droplets, vastly increasing the surface area for lipase to act upon", "It breaks down lipids directly into glycerol", "It makes the stomach acidic", "It acts as a catalyst inside the liver"], ans: 0 },
+                    { q: "Which blood vessel carries deoxygenated blood from the heart to the lungs?", options: ["Pulmonary artery", "Vena cava", "Aorta", "Pulmonary vein"], ans: 0 },
+                    { q: "What is the function of the coronary arteries?", options: ["To supply oxygenated blood directly to the heart muscle tissue for respiration", "To pump blood to the brain", "To carry deoxygenated blood to the lungs", "To transport digested food to the liver"], ans: 0 },
+                    { q: "How do statins help treat coronary heart disease?", options: ["They lower blood cholesterol, slowing down the buildup of fatty deposits in arteries", "They physically widen the arteries using a mesh tube", "They replace damaged heart valves", "They artificially regulate the heart rate"], ans: 0 },
+                    { q: "What happens to enzymes if the temperature goes above their optimum (e.g., 60°C)?", options: ["The amino acid chains break, changing the shape of the active site so it is denatured", "They gain kinetic energy and work much faster", "They are killed because they are living things", "They freeze and stop moving"], ans: 0 },
+                    { q: "What is the function of guard cells in a leaf?", options: ["They open and close the stomata to control water loss and gas exchange", "They carry out the majority of photosynthesis", "They transport water up the stem", "They protect the leaf from being eaten by herbivores"], ans: 0 },
+                    { q: "By which process does water move up the xylem?", options: ["Transpiration stream, driven by the evaporation of water from the leaves", "Active transport from the roots", "Translocation", "Gravity"], ans: 0 },
+                    { q: "Which component of blood is responsible for triggering the clotting process?", options: ["Platelets", "Red blood cells", "White blood cells", "Plasma"], ans: 0 },
+                    { q: "Why does the left ventricle have a much thicker muscular wall than the right ventricle?", options: ["It must pump blood at a high pressure to the entire body, whereas the right only pumps to the nearby lungs", "It stores more blood", "It pumps deoxygenated blood", "It acts as the pacemaker"], ans: 0 },
+                    { q: "What is a disadvantage of using a mechanical artificial heart valve instead of a biological one?", options: ["The patient must take anti-blood-clotting medication for the rest of their life", "It wears out very quickly and needs replacing within a year", "It is highly likely to be rejected by the immune system", "It only allows blood to flow backwards"], ans: 0 },
+                    { q: "Which reagent is used to test for the presence of proteins, and what is the positive color change?", options: ["Biuret solution; changes from blue to purple/lilac", "Benedict's solution; changes from blue to brick red", "Iodine solution; changes from orange to blue-black", "Ethanol; turns cloudy white"], ans: 0 },
+                    { q: "What happens in the spongy mesophyll layer of a leaf?", options: ["It contains large air spaces to allow gases to diffuse quickly to and from the palisade cells", "It is a waterproof layer preventing water loss", "It consists of dead cells that transport water", "It opens and closes the stomata"], ans: 0 },
+                    { q: "Which environmental conditions would result in the HIGHEST rate of transpiration?", options: ["Hot, dry, and windy conditions", "Cold, damp, and still conditions", "Hot, humid, and still conditions", "Cold, dry, and windy conditions"], ans: 0 },
+                    { q: "How is the phloem adapted for its function?", options: ["It has pores in the end walls (sieve plates) to allow cell sap containing sugars to flow easily", "It is reinforced with waterproof lignin", "It consists of dead, hollow cells", "It only transports substances upwards"], ans: 0 },
+                    { q: "Which enzyme is produced in the stomach, and what is its optimum pH?", options: ["Protease (pepsin); optimum pH 2 (acidic)", "Amylase; optimum pH 7 (neutral)", "Lipase; optimum pH 8 (alkaline)", "Carbohydrase; optimum pH 2 (acidic)"], ans: 0 },
+                    { q: "What role does blood plasma play?", options: ["It transports dissolved substances such as CO2, urea, glucose, and amino acids around the body", "It carries oxygen to respiring cells", "It produces antibodies", "It strictly transports hormones only"], ans: 0 },
+                    { q: "What happens if a person's natural pacemaker stops working properly?", options: ["An artificial pacemaker is implanted, which sends out electrical signals to correct the heart's rhythm", "The person must have a full heart transplant", "They are given statins", "A stent is placed in the right atrium"], ans: 0 },
+                    { q: "How do you prepare a food sample for chemical testing?", options: ["Grind the food with distilled water using a pestle and mortar, then filter the mixture to get a clear liquid", "Burn the food and collect the gases", "Boil the food in ethanol immediately", "Freeze the food and slice it thinly"], ans: 0 },
+                    { q: "What is translocation?", options: ["The movement of dissolved sugars from the leaves to the rest of the plant for immediate use or storage", "The loss of water vapor from leaves", "The movement of water and minerals up the stem", "The conversion of starch into glucose in the gut"] }
+                ],
+                long: [
+                    { q: "Explain how temperature affects the rate of enzyme-controlled reactions. (4 marks)", model: "1. As temperature increases up to the optimum, molecules gain kinetic energy, resulting in more frequent successful collisions.\n2. The rate of reaction increases to a peak (optimum temperature).\n3. Above the optimum, the high temperature breaks the bonds holding the enzyme together.\n4. The active site changes shape (denatures), meaning the substrate no longer fits, and the rate drops rapidly to zero.", maxMarks: 4 },
+                    { q: "Describe the functions of bile and how it aids in digestion. (4 marks)", model: "1. Bile is produced in the liver and stored in the gall bladder.\n2. It is highly alkaline, so it neutralises the hydrochloric acid from the stomach, providing optimum conditions for pancreatic enzymes.\n3. It emulsifies large lipid droplets into smaller droplets.\n4. This creates a much larger surface area for the enzyme lipase to break down the lipids faster.", maxMarks: 4 },
+                    { q: "Trace the path of blood through the heart, starting from the vena cava. (4 marks)", model: "1. Deoxygenated blood enters the right atrium via the vena cava, then passes to the right ventricle.\n2. It is pumped to the lungs via the pulmonary artery to be oxygenated.\n3. Oxygenated blood returns to the left atrium via the pulmonary vein.\n4. It enters the left ventricle and is pumped to the rest of the body at high pressure through the aorta.", maxMarks: 4 },
+                    { q: "Evaluate the use of stents in treating coronary heart disease. (4 marks)", model: "1. Advantages: Stents are effective for a long time, recovery from the surgery is relatively quick, and they immediately widen the artery.\n2. Disadvantages: There is a risk of complications during the operation (e.g., heart attack) or infection.\n3. Disadvantages: There is a risk of patients developing a blood clot near the stent (thrombosis).", maxMarks: 4 },
+                    { q: "Explain how the structure of a leaf is adapted for photosynthesis. (4 marks)", model: "1. The upper epidermis is transparent to let light pass through to the palisade layer.\n2. Palisade mesophyll cells are packed with chloroplasts and are near the top to absorb maximum light.\n3. Spongy mesophyll has air spaces allowing rapid diffusion of CO2 to the cells and O2 away.\n4. Stomata on the lower surface allow gas exchange, controlled by guard cells.", maxMarks: 4 },
+                    { q: "Describe how you would test a food sample for the presence of glucose. (3 marks)", model: "1. Add a few drops of Benedict's solution to the food sample in a test tube.\n2. Place the test tube in a water bath set to 75°C for 5 minutes.\n3. If glucose is present, the solution will change from blue to green, yellow, or brick-red (depending on concentration).", maxMarks: 3 },
+                    { q: "Compare the structure and function of xylem and phloem tissue. (4 marks)", model: "1. Xylem transports water and minerals upwards; Phloem transports dissolved sugars in both directions.\n2. Xylem is made of dead, hollow cells strengthened by lignin; Phloem is made of living cells.\n3. Xylem has completely hollow tubes; Phloem cells have pores in their end walls (sieve plates).\n4. The process in xylem is called transpiration; the process in phloem is called translocation.", maxMarks: 4 },
+                    { q: "Explain why increasing wind speed increases the rate of transpiration. (3 marks)", model: "1. Wind blows away the water vapor immediately surrounding the leaf.\n2. This maintains a steep concentration gradient of water vapor between the inside and outside of the leaf.\n3. Therefore, water diffuses out of the stomata more rapidly.", maxMarks: 3 },
+                    { q: "Describe the differences in structure between arteries, veins, and capillaries. (4 marks)", model: "1. Arteries have thick, elastic, muscular walls to withstand high blood pressure.\n2. Veins have thinner walls, a larger lumen, and contain valves to prevent the backflow of lower-pressure blood.\n3. Capillaries are extremely narrow with walls only one cell thick.\n4. Capillary thinness ensures a very short diffusion pathway for exchanging substances with tissues.", maxMarks: 4 },
+                    { q: "What is a pacemaker and how are faults with it treated? (3 marks)", model: "1. A pacemaker is a group of specialized cells in the right atrium that controls the resting heart rate.\n2. If it is faulty, the heart beats irregularly or too slowly.\n3. It is treated by implanting an artificial pacemaker, which emits electrical signals to stimulate regular heart contractions.", maxMarks: 3 }
+                ]
+            },
+            t3: { 
+                id: 't3', title: "Infection & Response", icon: "ph-shield-plus", emoji: "🦠", type: "standard",
+                match: [
+                    {q:"Pathogen", a:"A microorganism that causes infectious disease (virus, bacteria, protist, or fungi)."},
+                    {q:"Virus", a:"Extremely small pathogen that lives and reproduces inside host cells, causing cell damage."},
+                    {q:"Bacteria", a:"Prokaryotic cells that may produce toxins that damage tissues and make us feel ill."},
+                    {q:"Measles", a:"Viral disease showing fever and red rash; spread by inhalation of droplets. Prevented by vaccination."},
+                    {q:"Salmonella", a:"Bacterial disease spread in unhygienic food prep; causes fever, cramps, vomiting, and diarrhoea."},
+                    {q:"Malaria", a:"Protist disease spread by a mosquito vector; causes recurrent fever and can be fatal."},
+                    {q:"Rose Black Spot", a:"Fungal plant disease causing purple/black spots on leaves, which turn yellow and drop off early."},
+                    {q:"Phagocytosis", a:"Process where white blood cells engulf and digest invading pathogens."},
+                    {q:"Antibody", a:"Specific proteins produced by lymphocytes that lock onto specific antigens on pathogens."},
+                    {q:"Vaccination", a:"Injecting small quantities of dead/inactive pathogen to stimulate white blood cells to produce antibodies."},
+                    {q:"Herd Immunity", a:"When a large proportion of the population is immune to a disease, reducing the spread of the pathogen."},
+                    {q:"Antibiotic", a:"Medicines (like penicillin) that cure bacterial diseases by killing infective bacteria inside the body."},
+                    {q:"Digitalis", a:"Heart drug originating from the plant foxglove."},
+                    {q:"Penicillin", a:"First antibiotic, discovered by Alexander Fleming from the Penicillium mould."},
+                    {q:"Monoclonal Antibody", a:"Proteins produced from a single clone of cells, specific to one binding site on one protein antigen."},
+                    {q:"Hybridoma Cell", a:"A cell formed by fusing a mouse lymphocyte with a tumor cell; divides rapidly and produces antibodies."}
+                ],
+                mcq: [
+                    { q: "Why can't antibiotics be used to treat viral infections like HIV or measles?", options: ["Viruses reproduce INSIDE host body cells, so antibiotics cannot reach them without destroying the host cell", "Viruses mutate too quickly", "Antibiotics only cure fungal diseases", "Viruses are immune to all chemicals"], ans: 0 },
+                    { q: "How do bacteria make you feel ill?", options: ["They reproduce rapidly and produce toxins that damage tissues", "They burst out of your cells", "They eat your red blood cells", "They lower your body temperature"], ans: 0 },
+                    { q: "What is the primary vector for the malaria protist?", options: ["Female Anopheles mosquito", "House fly", "Ticks", "Contaminated water"], ans: 0 },
+                    { q: "How is Rose Black Spot treated in plants?", options: ["Using fungicides and removing/destroying infected leaves", "Applying antibiotics to the soil", "Injecting the stem with a vaccine", "Covering the plant in plastic"], ans: 0 },
+                    { q: "Which is a NON-SPECIFIC defense system of the human body?", options: ["The stomach produces hydrochloric acid which kills swallowed pathogens", "Lymphocytes produce specific antibodies", "Lymphocytes produce antitoxins", "Hybridoma cells produce monoclonal antibodies"], ans: 0 },
+                    { q: "What happens during vaccination?", options: ["Small amounts of dead or inactive pathogen are introduced to stimulate antibody production", "A large dose of live pathogen is injected", "Antibiotics are injected to clear the blood", "Monoclonal antibodies are given for immediate immunity"], ans: 0 },
+                    { q: "What is the main danger of the overuse of antibiotics in medicine and agriculture?", options: ["It accelerates the emergence of antibiotic-resistant strains of bacteria (e.g., MRSA)", "It causes the bacteria to mutate into viruses", "It causes human cells to become resistant to pain", "It poisons the water supply"], ans: 0 },
+                    { q: "Where does the painkiller aspirin originally come from?", options: ["Willow bark", "Foxglove plants", "Penicillium mould", "Soil bacteria"], ans: 0 },
+                    { q: "In drug discovery, what is the purpose of pre-clinical testing?", options: ["To test the drug on cells, tissues, and live animals for toxicity and efficacy before human trials", "To test the drug on a large number of sick patients", "To determine the exact price of the drug", "To see if the drug tastes good"], ans: 0 },
+                    { q: "During clinical trials, what is a 'double-blind' trial?", options: ["Neither the patients nor the doctors know who receives the real drug and who receives the placebo", "The patients are blindfolded", "The drug is tested twice on animals", "The doctors know who gets the placebo, but patients do not"], ans: 0 },
+                    { q: "How is a hybridoma cell created to produce monoclonal antibodies?", options: ["By fusing a mouse lymphocyte (which makes antibodies) with a fast-dividing tumor cell", "By fusing a red blood cell with a stem cell", "By combining two different bacteria", "By mixing human blood with mouse blood"], ans: 0 },
+                    { q: "How do pregnancy tests utilize monoclonal antibodies?", options: ["The antibodies bind to the hormone HCG in urine, triggering a color change indicator", "The antibodies kill the HCG hormone", "The antibodies detect the DNA of the baby", "The antibodies change color when they touch water"], ans: 0 },
+                    { q: "How can monoclonal antibodies be used to treat cancer?", options: ["They are bound to radioactive/toxic drugs; they target and bind to cancer antigens, delivering the poison selectively", "They teach the brain to ignore the cancer", "They cause the cancer cells to undergo mitosis faster", "They mutate the cancer cells into healthy cells"], ans: 0 },
+                    { q: "Why are monoclonal antibodies not yet as widely used as originally hoped?", options: ["They have created more side effects than expected", "They are too easy to produce, causing market saturation", "They only work on viruses", "They are illegal"], ans: 0 },
+                    { q: "What is a common symptom of a nitrate deficiency in plants?", options: ["Stunted growth, because nitrates are needed for protein synthesis", "Yellow leaves (chlorosis)", "Black spots on leaves", "Malformed stems"], ans: 0 },
+                    { q: "What causes chlorosis (yellowing of leaves) in plants?", options: ["Magnesium deficiency, as magnesium is needed to make chlorophyll", "Nitrate deficiency", "Too much sunlight", "A viral infection"], ans: 0 },
+                    { q: "Which of the following is a physical plant defence response?", options: ["Cellulose cell walls, a tough waxy cuticle, and layers of dead cells (bark)", "Producing antibacterial chemicals", "Releasing poisons to deter herbivores", "Drooping when touched"], ans: 0 },
+                    { q: "What role do antitoxins play in the immune system?", options: ["They counteract the toxins produced by invading bacteria", "They digest the bacteria physically", "They bind to the viruses to stop them entering cells", "They create memory cells"], ans: 0 },
+                    { q: "What type of pathogen causes Gonorrhoea?", options: ["Bacterium", "Virus", "Protist", "Fungus"], ans: 0 },
+                    { q: "What is the function of the cilia and mucus in the trachea and bronchi?", options: ["Mucus traps particles/pathogens, and cilia waft the mucus up to the throat to be swallowed", "They produce stomach acid", "They digest bacteria", "They absorb oxygen into the blood"] }
+                ],
+                long: [
+                    { q: "Explain how vaccination protects an individual from disease and why it relies on memory cells. (4 marks)", model: "1. A vaccine contains small quantities of a dead or inactive form of the pathogen.\n2. This stimulates white blood cells (lymphocytes) to produce specific antibodies against the pathogen's antigens.\n3. If the same live pathogen re-enters the body later, white blood cells recognize it.\n4. Memory cells rapidly produce large amounts of the correct antibodies to destroy the pathogen before symptoms develop.", maxMarks: 4 },
+                    { q: "Describe the process of producing monoclonal antibodies. (4 marks)", model: "1. A mouse is injected with a specific antigen to stimulate its lymphocytes to produce antibodies.\n2. The lymphocytes are extracted but they do not divide easily.\n3. A lymphocyte is fused with a rapidly dividing tumor cell to create a hybridoma cell.\n4. The hybridoma divides endlessly to produce clones, which all produce the same specific monoclonal antibody, which is then collected and purified.", maxMarks: 4 },
+                    { q: "Evaluate the use of monoclonal antibodies in treating cancer. (4 marks)", model: "1. Advantage: Monoclonal antibodies are specific to the cancer cell antigens, meaning they only bind to and destroy cancer cells.\n2. Advantage: This means healthy cells are largely unaffected, unlike standard chemotherapy.\n3. Disadvantage: They have caused more unexpected side effects in humans than initially hoped.\n4. Disadvantage: They are currently very expensive and complex to develop and produce.", maxMarks: 4 },
+                    { q: "Explain how a double-blind trial ensures that the results of a drug test are valid. (3 marks)", model: "1. Patients are randomly split into two groups; one gets the real drug, one gets a placebo.\n2. Neither the patients nor the doctors know who has received which until the end of the trial.\n3. This eliminates subconscious bias from doctors and the placebo effect from patients when recording results.", maxMarks: 3 },
+                    { q: "Describe how plants can defend themselves against herbivores and pathogens chemically and mechanically. (4 marks)", model: "1. Chemical: Plants can produce antibacterial chemicals to kill infecting bacteria (e.g., mint/witch hazel).\n2. Chemical: They produce poisons to deter herbivores (e.g., deadly nightshade).\n3. Mechanical: Thorns and hairs deter animals from eating or touching them.\n4. Mechanical: Leaves that droop or curl when touched dislodge insects.", maxMarks: 4 },
+                    { q: "Explain why a magnesium deficiency causes poor plant growth. (3 marks)", model: "1. Magnesium is an essential ion required to make chlorophyll.\n2. A lack of chlorophyll causes leaves to turn yellow (chlorosis), meaning the plant absorbs less light.\n3. Less light absorption means a lower rate of photosynthesis, resulting in less glucose for respiration and growth.", maxMarks: 3 },
+                    { q: "Describe the three ways white blood cells defend the body against pathogens. (3 marks)", model: "1. Phagocytosis: They engulf and digest the pathogens.\n2. Antibody production: Lymphocytes produce specific antibodies that bind to and destroy pathogens.\n3. Antitoxin production: They produce antitoxins that counteract the harmful toxins released by bacteria.", maxMarks: 3 },
+                    { q: "How can a gardener identify the specific disease infecting their plants? (3 marks)", model: "1. Compare the symptoms shown by the plant to a gardening manual or professional website.\n2. Take the infected plant to a laboratory to identify the pathogen using testing kits.\n3. Use specific testing kits containing monoclonal antibodies to instantly identify the pathogen.", maxMarks: 3 },
+                    { q: "Explain how the spread of malaria can be controlled. (3 marks)", model: "1. Malaria is spread by the mosquito vector.\n2. Spread is reduced by preventing mosquitoes from breeding (e.g., draining stagnant water).\n3. Spread is prevented by using mosquito nets and insect repellent to avoid being bitten.", maxMarks: 3 },
+                    { q: "What is antibiotic resistance and how is it caused? (3 marks)", model: "1. Random mutations occur in bacterial DNA, creating strains resistant to the antibiotic.\n2. The resistant bacteria survive the antibiotic treatment and reproduce without competition.\n3. It is caused by the overuse of antibiotics and patients failing to complete their prescribed course.", maxMarks: 3 }
+                ]
+            },
+            t4: { 
+                id: 't4', title: "Bioenergetics", icon: "ph-lightning", emoji: "⚡", type: "standard",
+                match: [
+                    {q:"Photosynthesis Equation", a:"Carbon dioxide + water -> glucose + oxygen (using light and chlorophyll)."},
+                    {q:"Endothermic Reaction", a:"A reaction that transfers energy from the environment (e.g., photosynthesis absorbs light)."},
+                    {q:"Limiting Factor", a:"A factor that prevents the rate of photosynthesis from increasing (e.g., low light, low CO2, low temp)."},
+                    {q:"Inverse Square Law", a:"As distance from a light source doubles, the light intensity falls by a quarter (1/d²)."},
+                    {q:"Aerobic Respiration", a:"Exothermic reaction breaking down glucose with oxygen to release a large amount of energy."},
+                    {q:"Aerobic Equation", a:"Glucose + oxygen -> carbon dioxide + water (transfers energy)."},
+                    {q:"Anaerobic Respiration", a:"Incomplete breakdown of glucose without oxygen, releasing much less energy."},
+                    {q:"Lactic Acid", a:"Toxic product of anaerobic respiration in mammalian muscles; causes muscle fatigue."},
+                    {q:"Oxygen Debt", a:"The amount of extra oxygen the body needs after exercise to react with and remove the accumulated lactic acid."},
+                    {q:"Fermentation", a:"Anaerobic respiration in plant and yeast cells; produces ethanol and carbon dioxide."},
+                    {q:"Metabolism", a:"The sum of all the chemical reactions in a cell or the body."},
+                    {q:"Glycogen", a:"The storage form of excess glucose in the liver and muscles of animals."},
+                    {q:"Starch", a:"The insoluble storage form of glucose in plants."},
+                    {q:"Cellulose", a:"Complex carbohydrate made from glucose, used to strengthen plant cell walls."},
+                    {q:"Lipid Synthesis", a:"Forming one molecule of lipid from one molecule of glycerol and three molecules of fatty acids."},
+                    {q:"Urea Formation", a:"Breakdown of excess proteins into amino acids, which are deaminated in the liver to form urea."}
+                ],
+                mcq: [
+                    { q: "What type of reaction is photosynthesis?", options: ["Endothermic - it absorbs light energy from the environment", "Exothermic - it releases heat", "Oxidation - it burns glucose", "Neutralisation - it balances pH"], ans: 0 },
+                    { q: "What is the correct balanced symbol equation for photosynthesis?", options: ["6CO2 + 6H2O -> C6H12O6 + 6O2", "CO2 + H2O -> C6H12O6 + O2", "C6H12O6 + 6O2 -> 6CO2 + 6H2O", "C6H12O6 -> 2C3H6O3"], ans: 0 },
+                    { q: "According to the Inverse Square Law, if you double the distance of a lamp from a plant, what happens to the light intensity?", options: ["It decreases to one quarter (1/4) of the original intensity", "It halves (1/2)", "It doubles", "It stays the same"], ans: 0 },
+                    { q: "Which of these is NOT a typical limiting factor of photosynthesis?", options: ["Oxygen concentration", "Carbon dioxide concentration", "Light intensity", "Temperature"], ans: 0 },
+                    { q: "How do commercial greenhouses utilize the concept of limiting factors?", options: ["They use heaters, artificial lighting, and CO2 generators to maximize the rate of photosynthesis and thus yield, weighing costs vs profit", "They block out the sun to keep plants cool", "They remove all carbon dioxide to prevent poisoning", "They freeze the plants at night"], ans: 0 },
+                    { q: "What are the products of anaerobic respiration in yeast cells (fermentation)?", options: ["Ethanol and carbon dioxide", "Lactic acid and water", "Glucose and oxygen", "Methane and water"], ans: 0 },
+                    { q: "Why is anaerobic respiration in muscles much less efficient than aerobic respiration?", options: ["The oxidation of glucose is incomplete, so much less energy is transferred", "It requires too much oxygen", "It produces carbon dioxide which is toxic", "It happens in the nucleus instead of mitochondria"], ans: 0 },
+                    { q: "What happens to lactic acid after vigorous exercise?", options: ["Blood flowing through the muscles transports it to the liver where it is converted back to glucose", "It is exhaled through the lungs as a gas", "It is sweated out through the skin", "It remains in the muscles permanently"], ans: 0 },
+                    { q: "What is the definition of metabolism?", options: ["The sum of all the chemical reactions taking place in a cell or the body", "The rate at which you digest food in the stomach", "The process of breathing rapidly after exercise", "The breakdown of dead material by bacteria"], ans: 0 },
+                    { q: "Which metabolic process involves forming lipids?", options: ["Reactions of one molecule of glycerol and three molecules of fatty acids", "Linking amino acids together", "Breaking down proteins", "Converting glucose to cellulose"], ans: 0 },
+                    { q: "How does the body physically respond to the increased demand for energy during exercise?", options: ["Heart rate, breathing rate, and breath volume all increase to supply muscles with more oxygenated blood", "Heart rate slows down to conserve energy", "Breathing becomes shallow", "Blood vessels to the muscles constrict"], ans: 0 },
+                    { q: "What is an 'oxygen debt'?", options: ["The extra oxygen needed after exercise to react with the accumulated lactic acid and remove it from the cells", "The oxygen lost in sweat", "The amount of oxygen a plant uses at night", "The oxygen required to start anaerobic respiration"], ans: 0 },
+                    { q: "How do plants primarily use the glucose produced in photosynthesis?", options: ["For respiration to release energy", "To produce light at night", "To absorb water from the soil", "To attract insects for pollination"], ans: 0 },
+                    { q: "Which of the following is synthesized from glucose to strengthen plant cell walls?", options: ["Cellulose", "Starch", "Glycogen", "Lipids"], ans: 0 },
+                    { q: "Where does aerobic respiration continuously occur in living cells?", options: ["Mitochondria", "Ribosomes", "Chloroplasts", "Nucleus"], ans: 0 },
+                    { q: "If a photosynthesis graph showing Rate vs Light Intensity levels off and goes flat, what does this indicate?", options: ["Light is no longer the limiting factor; something else (like CO2 or temperature) is limiting the rate", "The plant has died", "The light is too bright and has destroyed the chlorophyll", "Photosynthesis has reached maximum theoretical limits and cannot be increased"], ans: 0 },
+                    { q: "Why do plants store glucose as starch rather than leaving it as glucose?", options: ["Starch is insoluble, so it doesn't affect the osmosis/water balance of the cells", "Starch tastes better to herbivores", "Glucose is toxic to plant cells", "Starch absorbs light better"], ans: 0 },
+                    { q: "What happens to a plant's enzymes if the temperature reaches 45-50 degrees Celsius?", options: ["The enzymes denature, the active site changes shape, and the rate of photosynthesis falls rapidly to zero", "The rate of photosynthesis doubles", "The enzymes work optimally", "The plant respires anaerobically"], ans: 0 },
+                    { q: "Which process uses the products of fermentation in the food industry?", options: ["The manufacture of bread and alcoholic drinks", "The production of yogurt from milk", "The curing of meats", "The creation of synthetic meat"], ans: 0 },
+                    { q: "Which of these is an example of a metabolic reaction breaking a large molecule down?", options: ["The breakdown of excess proteins in the liver to form urea for excretion", "The conversion of glucose to starch", "The formation of lipids from fatty acids", "The synthesis of proteins from amino acids"] }
+                ],
+                long: [
+                    { q: "Explain how you would investigate the effect of light intensity on the rate of photosynthesis. (4 marks)", model: "1. Place a piece of pondweed in a boiling tube of water and sodium hydrogencarbonate (to provide CO2).\n2. Set up an LED lamp at a specific measured distance (e.g., 10cm) from the pondweed.\n3. Allow it to acclimatize, then count the number of oxygen bubbles produced in 1 minute (or collect the gas in a syringe to measure volume).\n4. Move the lamp to different distances (e.g., 20cm, 30cm) and repeat the counts, controlling temperature with a water bath.", maxMarks: 4 },
+                    { q: "Explain the Inverse Square Law in the context of photosynthesis. (3 marks)", model: "1. The intensity of light is inversely proportional to the square of the distance from the source (Intensity ∝ 1/d²).\n2. This means if you double the distance of the lamp from the plant, the light intensity falls by a factor of 4 (it becomes a quarter).\n3. Consequently, the rate of photosynthesis will drop significantly as distance increases.", maxMarks: 3 },
+                    { q: "A farmer wishes to maximize the yield of tomatoes in his greenhouse. Discuss the economics and limiting factors he must consider. (4 marks)", model: "1. The farmer can use artificial lighting, heaters, and pump in CO2 to ensure none of these are limiting factors, maximizing the rate of photosynthesis.\n2. However, this equipment is expensive to buy and run.\n3. He must calculate whether the extra cost of running the equipment is outweighed by the extra profit made from the higher yield of tomatoes.\n4. He must also ensure the temperature does not rise too high, which would denature the enzymes and kill the plants.", maxMarks: 4 },
+                    { q: "Describe what happens to the body during vigorous exercise. (4 marks)", model: "1. Muscle cells respire more rapidly to provide energy for contraction.\n2. The heart rate increases to pump more oxygenated blood to the muscles faster.\n3. The breathing rate and breath volume increase to bring more oxygen into the body and remove CO2.\n4. If insufficient oxygen reaches the muscles, they begin to respire anaerobically, producing lactic acid.", maxMarks: 4 },
+                    { q: "Explain what an 'oxygen debt' is and how the body clears it. (3 marks)", model: "1. Oxygen debt is the amount of extra oxygen the body needs after exercise to react with the accumulated lactic acid.\n2. Heavy breathing continues after exercise to supply this extra oxygen.\n3. Blood flows through the muscles to transport the lactic acid to the liver, where it is converted back into glucose.", maxMarks: 3 },
+                    { q: "Compare aerobic and anaerobic respiration in mammalian muscle cells. (4 marks)", model: "1. Aerobic requires oxygen; anaerobic occurs in the absence of oxygen.\n2. Aerobic produces carbon dioxide and water; anaerobic produces lactic acid.\n3. Aerobic oxidation of glucose is complete; anaerobic is incomplete.\n4. Therefore, aerobic respiration transfers a much larger amount of energy than anaerobic.", maxMarks: 4 },
+                    { q: "List four ways a plant uses the glucose produced in photosynthesis. (4 marks)", model: "1. For respiration to release energy.\n2. Converted into insoluble starch for storage.\n3. Used to produce fat or oil (lipids) for storage in seeds.\n4. Used to produce cellulose to strengthen the cell wall (or combined with nitrate ions to form amino acids for protein synthesis).", maxMarks: 4 },
+                    { q: "Define metabolism and give three examples of metabolic reactions. (4 marks)", model: "1. Metabolism is the sum of all the chemical reactions in a cell or the body.\n2. Example 1: The conversion of glucose to starch, glycogen, or cellulose.\n3. Example 2: The formation of lipid molecules from one molecule of glycerol and three molecules of fatty acids.\n4. Example 3: The breakdown of excess proteins into urea for excretion.", maxMarks: 4 },
+                    { q: "Explain how a graph of photosynthesis rate against carbon dioxide concentration changes as CO2 increases. (3 marks)", model: "1. Initially, as CO2 concentration increases, the rate of photosynthesis increases linearly, as CO2 is the limiting factor.\n2. Eventually, the line levels off (plateaus).\n3. At this point, increasing CO2 has no further effect because another factor (like light intensity or temperature) has become the limiting factor.", maxMarks: 3 },
+                    { q: "Why do athletes train at high altitudes? (3 marks)", model: "1. At high altitudes, there is less oxygen in the air.\n2. This stimulates the athlete's body to produce more red blood cells over time.\n3. When they return to sea level, the extra red blood cells allow them to transport oxygen more efficiently, delaying anaerobic respiration and lactic acid build-up.", maxMarks: 3 }
+                ]
+            },
+            maths: {
+                id: 'maths', title: 'Applied Maths Skills', icon: 'ph-calculator', emoji: '🧮', type: 'maths',
+                questions: [
+                    { q: 'An image of a cell measures 50mm. The actual cell is 0.1mm. Calculate the magnification.', a: '500', hint: 'Magnification = Image size ÷ Actual size', working: 'Magnification = 50 ÷ 0.1 = 500' },
+                    { q: 'A bacterial cell is 2 µm long. Convert this to millimetres (mm).', a: '0.002', hint: 'Divide micrometres (µm) by 1000 to get mm.', working: '2 ÷ 1000 = 0.002 mm' },
+                    { q: 'A lamp is placed 4 meters away from a plant. Calculate the relative light intensity using the inverse square law (1/d²). Answer as a decimal.', a: '0.0625', hint: 'Intensity = 1 ÷ (distance squared)', working: '1 ÷ (4²) = 1 ÷ 16 = 0.0625' },
+                    { q: 'A student places a 5g potato piece in concentrated sugar solution. After 30 mins, it weighs 4g. Calculate the percentage change.', a: '-20', hint: 'Percentage Change = ((New - Old) ÷ Old) × 100', working: '((4 - 5) ÷ 5) × 100 = (-1 ÷ 5) × 100 = -20%' },
+                    { q: 'Calculate the area of a zone of inhibition with a radius of 15 mm. (Use π = 3.14).', a: '706.5', hint: 'Area of a circle = πr²', working: 'Area = 3.14 × (15²) = 3.14 × 225 = 706.5 mm²' },
+                    { q: 'A single bacterium divides every 20 minutes. If you start with 1 bacterium, how many are there after 2 hours?', a: '64', hint: 'Find how many divisions happen in 2 hours, then do 2 to the power of that number.', working: '2 hours = 120 mins. 120 ÷ 20 = 6 divisions.\n1 × 2^6 = 64 bacteria' },
+                    { q: 'A patient’s heart beats 75 times per minute. Calculate the total number of beats in one day.', a: '108000', hint: 'Multiply beats per min by minutes in an hour, then hours in a day.', working: '75 × 60 = 4,500 beats per hour\n4,500 × 24 = 108,000 beats' },
+                    { q: 'Write the number 0.000045 in standard form (format as 4.5e-X).', a: '4.5e-5', hint: 'Move the decimal to make a number between 1 and 10, count the jumps.', working: 'Decimal moves right 5 places.\n4.5 × 10^-5 (4.5e-5)' },
+                    { q: 'A cell cycle takes 24 hours. A cell is observed to spend 5% of its time in mitosis. How many hours is this? (Round to 1 decimal place)', a: '1.2', hint: 'Find 5% of 24 hours.', working: '(5 ÷ 100) × 24 = 1.2 hours' },
+                    { q: 'A plant shoots up 15cm in 5 days. Calculate the mean rate of growth in mm per day.', a: '30', hint: 'Convert cm to mm first, then divide by days.', working: '15cm = 150mm\nRate = 150 ÷ 5 = 30 mm/day' },
+                    { q: 'If a lamp is moved from 2m to 6m away from a plant, by what factor does the light intensity decrease? (The distance tripled)', a: '9', hint: 'Inverse square law: if distance goes up by factor of 3, intensity goes down by 3 squared.', working: 'Distance factor = 3.\n3² = 9. It decreases by a factor of 9.' },
+                    { q: 'Calculate the surface area of a 2cm cube.', a: '24', hint: 'Area of one face × 6', working: 'Area of face = 2 × 2 = 4 cm²\nTotal SA = 4 × 6 = 24 cm²' },
+                    { q: 'Calculate the volume of a 2cm cube.', a: '8', hint: 'Length × width × height', working: 'Volume = 2 × 2 × 2 = 8 cm³' },
+                    { q: 'Using the SA and Volume from above, what is the value of X in the SA:V ratio (X:1)?', a: '3', hint: 'Divide Surface Area by Volume.', working: 'SA = 24, V = 8\nRatio = 24:8. Divide by 8 = 3:1. X = 3.' },
+                    { q: 'A potometer bubble moves 24mm in 10 minutes. Calculate the rate of transpiration in mm/hour.', a: '144', hint: 'Find mm per minute, then multiply by 60.', working: 'Rate per min = 24 ÷ 10 = 2.4 mm/min\n2.4 × 60 = 144 mm/hour' },
+                    { q: 'An enzyme produces 30cm³ of product in 15 seconds. What is the rate of reaction in cm³/s?', a: '2', hint: 'Divide volume by time.', working: 'Rate = 30 ÷ 15 = 2 cm³/s' },
+                    { q: 'A microscope field of view is 2.4 mm wide. 8 epidermal cells fit across it. Calculate the width of one cell in mm.', a: '0.3', hint: 'Divide the total width by the number of cells.', working: '2.4 ÷ 8 = 0.3 mm' },
+                    { q: 'In a population of 8000 bacteria, an antibiotic kills 99%. How many bacteria survive?', a: '80', hint: 'If 99% die, 1% survive. Find 1% of 8000.', working: '(1 ÷ 100) × 8000 = 80 bacteria' },
+                    { q: 'A person consumes 2500 kcal per day. 15% of this energy is used by the brain. How many kcal does the brain use?', a: '375', hint: 'Find 15% of 2500.', working: '(15 ÷ 100) × 2500 = 375 kcal' },
+                    { q: 'Blood pressure is measured as 120/80. The pulse pressure is the difference between these two numbers. What is it?', a: '40', hint: 'Subtract the lower number from the higher number.', working: '120 - 80 = 40' }
+                ]
+            }
+        };
+
+        const TAB_ORDER = ['t1', 't2', 't3', 't4', 'maths'];
+
+        /** 
+         * ==========================================
+         * STATE MANAGEMENT
+         * ==========================================
+         */
+        let currentUnitId = null;
+        let currentActivity = null;
+        let currentStreak = 0;
+        let activeDictationId = null;
+        let dictationRecognition = null;
+        
+        let state = {};
+        
+        function triggerLockedInOverlay() {
+            const overlay = document.getElementById('locked-in-overlay');
+            const content = document.getElementById('locked-in-content');
+            
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            
+            setTimeout(() => {
+                content.classList.remove('scale-0', 'opacity-0');
+                content.classList.add('animate-lock-in');
+            }, 50);
+
+            setTimeout(() => {
+                content.classList.remove('animate-lock-in');
+                content.classList.add('scale-0', 'opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    overlay.classList.remove('flex');
+                }, 500); 
+            }, 3000);
+        }
+
+        function initState() {
+            TAB_ORDER.forEach(id => {
+                const unitData = APP_DATA[id];
+                if (unitData.type === 'standard') {
+                    const randomizedMCQ = shuffleArray([...unitData.mcq]).map(q => {
+                        const correctOptionText = q.options[q.ans];
+                        const shuffledOptions = shuffleArray([...q.options]);
+                        return { ...q, options: shuffledOptions, ans: shuffledOptions.indexOf(correctOptionText) };
+                    });
+
+                    state[id] = {
+                        matchBatchIndex: 0,
+                        matchCompleted: [],
+                        mcqQueue: randomizedMCQ,
+                        mcqRetryQueue: [],
+                        mcqTotal: unitData.mcq.length,
+                        mcqCorrect: 0,
+                        mcqActiveQuestion: null,
+                        longScores: {},
+                        longAnswersText: {},
+                        longActiveIdx: 0
+                    };
+                    state[id].matchQs = shuffleArray([...unitData.match].map((m,i)=>({t:m.q, i})));
+                    state[id].matchAs = shuffleArray([...unitData.match].map((m,i)=>({t:m.a, i})));
+                    state[id].matchSelQ = null;
+                    state[id].matchSelA = null;
+                } else if (unitData.type === 'maths') {
+                    state[id] = { correct: 0, answers: {}, submitted: {} };
+                }
+            });
+            renderSplashMenu();
+            initKofiWidgets();
+        }
+
+        function initKofiWidgets() {
+            const splashContainer = document.getElementById('kofi-splash-container');
+            if (splashContainer && window.kofiwidget2) {
+                splashContainer.innerHTML = '';
+                kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'L8M52AP3NY');
+                kofiwidget2.draw();
+            }
+            
+            const bannerContainer = document.getElementById('kofi-banner-container');
+            if (bannerContainer && window.kofiwidget2) {
+                bannerContainer.innerHTML = '';
+                kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'L8M52AP3NY');
+                kofiwidget2.draw();
+            }
+        }
+
+        /** 
+         * ==========================================
+         * UTILITIES & UI
+         * ==========================================
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showToast(msg, icon = 'ph-info') {
+            const toast = document.getElementById('toast-message');
+            document.getElementById('toast-text').innerText = msg;
+            document.getElementById('toast-icon').className = `ph-fill ${icon} text-xl`;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => { toast.classList.add('opacity-0'); }, 3000);
+        }
+
+        function updateStreakUI(isCorrect) {
+            const banner = document.getElementById('streak-banner');
+            const counter = document.getElementById('streak-counter');
+            
+            if (isCorrect) {
+                currentStreak++;
+                banner.classList.add('streak-glow', 'bg-emerald-50');
+                banner.classList.remove('animate-streak-pop');
+                void banner.offsetWidth; // trigger reflow
+                banner.classList.add('animate-streak-pop');
+                counter.innerText = currentStreak;
+            } else {
+                currentStreak = 0;
+                counter.innerText = currentStreak;
+                banner.classList.remove('streak-glow', 'bg-emerald-50');
+                banner.classList.add('animate-shake');
+                setTimeout(() => banner.classList.remove('animate-shake'), 400);
+            }
+        }
+
+        /** 
+         * ==========================================
+         * NAVIGATION & ROUTING
+         * ==========================================
+         */
+        function renderSplashMenu() {
+            const gridP2 = document.getElementById('grid-paper2');
+            const gridSkills = document.getElementById('grid-skills');
+            
+            if (gridP2) gridP2.innerHTML = '';
+            if (gridSkills) gridSkills.innerHTML = '';
+            
+            TAB_ORDER.forEach(id => {
+                const d = APP_DATA[id];
+                const btn = document.createElement('button');
+                btn.className = "bg-white p-2 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-400 hover:shadow-md transition-all transform hover:-translate-y-1 flex flex-col items-center justify-center text-center gap-1 h-full w-full";
+                btn.onclick = () => openUnit(id);
+                btn.innerHTML = `
+                    <div class="text-3xl sm:text-4xl drop-shadow-sm">${d.emoji}</div>
+                    <div class="font-heading font-bold text-slate-800 text-xs sm:text-sm leading-tight">${d.title}</div>
+                `;
+                
+                if (['t1', 't2', 't3', 't4'].includes(id)) {
+                    if (gridP2) gridP2.appendChild(btn);
+                } else {
+                    if (gridSkills) gridSkills.appendChild(btn);
+                }
+            });
+        }
+
+        function openUnit(id) {
+            currentUnitId = id;
+            const data = APP_DATA[id];
+            
+            document.getElementById('splash-screen').classList.add('hidden');
+            document.getElementById('app-header').classList.remove('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('main-body').classList.remove('overflow-hidden');
+            
+            document.getElementById('streak-emoji').innerText = data.emoji;
+            document.getElementById('header-icon').className = `ph-bold ${data.icon} text-2xl text-emerald-600`;
+            document.getElementById('header-unit-title').innerText = data.title;
+            
+            renderActivityNav();
+            
+            if (data.type === 'standard') switchActivity('match');
+            else switchActivity('maths');
+        }
+
+        function returnToMenu() {
+            document.getElementById('splash-screen').classList.remove('hidden');
+            document.getElementById('app-header').classList.add('hidden');
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('main-body').classList.add('overflow-hidden');
+        }
+
+        function renderActivityNav() {
+            const nav = document.getElementById('activity-tabs');
+            nav.innerHTML = '';
+            const type = APP_DATA[currentUnitId].type;
+            
+            let tabs = [];
+            if (type === 'standard') {
+                tabs = [
+                    { id: 'match', label: '1. Terminology', icon: 'ph-arrows-merge' },
+                    { id: 'mcq', label: '2. Quiz', icon: 'ph-list-checks' },
+                    { id: 'long', label: '3. Long Answers', icon: 'ph-pen-nib' },
+                    { id: 'report', label: 'Dashboard', icon: 'ph-chart-bar' }
+                ];
+            } else {
+                tabs = [
+                    { id: 'maths', label: 'Applied Skills', icon: 'ph-calculator' },
+                    { id: 'report', label: 'Dashboard', icon: 'ph-chart-bar' }
+                ];
+            }
+            
+            tabs.forEach(t => {
+                const btn = document.createElement('button');
+                btn.id = `nav-btn-${t.id}`;
+                btn.className = `tab-btn flex flex-col items-center justify-center px-4 py-3 min-w-[120px] border-b-4 text-sm font-semibold transition-colors border-transparent text-slate-500 hover:bg-slate-50`;
+                btn.onclick = () => switchActivity(t.id);
+                btn.innerHTML = `<i class="ph-duotone ${t.icon} text-2xl mb-1"></i> <span class="whitespace-nowrap">${t.label}</span>`;
+                nav.appendChild(btn);
+            });
+        }
+
+        function switchActivity(actId) {
+            currentActivity = actId;
+            const data = APP_DATA[currentUnitId];
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-emerald-500', 'text-emerald-700', 'bg-emerald-50');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+            const activeBtn = document.getElementById(`nav-btn-${actId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-slate-500');
+                activeBtn.classList.add('active', 'border-emerald-500', 'text-emerald-700', 'bg-emerald-50');
+            }
+            
+            document.querySelectorAll('.activity-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${actId}`).classList.add('active');
+
+            if (actId === 'match') renderMatch();
+            else if (actId === 'mcq') {
+                if (!state[currentUnitId].mcqActiveQuestion && state[currentUnitId].mcqQueue.length > 0) {
+                    state[currentUnitId].mcqActiveQuestion = state[currentUnitId].mcqQueue[0];
+                }
+                renderMCQ();
+            }
+            else if (actId === 'long') renderLongAnswers();
+            else if (actId === 'maths') renderMaths();
+            else if (actId === 'report') updateDashboard();
+        }
+
+        function updateDashboard() {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            
+            document.getElementById('dash-bg-icon').className = `ph-fill ${data.icon} text-[15rem]`;
+            
+            let currentTotal = 0;
+            let possibleTotal = 0;
+            let fbText = "Complete all activities in this unit to uncover your fate.";
+
+            if (data.type === 'standard') {
+                document.getElementById('dash-standard-stats').classList.remove('hidden');
+                document.getElementById('dash-maths-stats').classList.add('hidden');
+                
+                document.getElementById('dash-score-match').innerText = s.matchCompleted.length;
+                document.getElementById('dash-total-match').innerText = `/ ${data.match.length}`;
+                currentTotal += s.matchCompleted.length;
+                possibleTotal += data.match.length;
+                
+                document.getElementById('dash-score-mcq').innerText = s.mcqCorrect;
+                document.getElementById('dash-total-mcq').innerText = `/ ${s.mcqTotal}`;
+                currentTotal += s.mcqCorrect;
+                possibleTotal += s.mcqTotal;
+                
+                let longCurrent = 0;
+                let longMax = 0;
+                data.long.forEach((l, i) => {
+                    longCurrent += (s.longScores[i] || 0);
+                    longMax += l.maxMarks;
+                });
+                document.getElementById('dash-score-long').innerText = longCurrent;
+                document.getElementById('dash-total-long').innerText = `/ ${longMax}`;
+                currentTotal += longCurrent;
+                possibleTotal += longMax;
+                
+            } else {
+                document.getElementById('dash-standard-stats').classList.add('hidden');
+                document.getElementById('dash-maths-stats').classList.remove('hidden');
+                
+                document.getElementById('dash-score-maths').innerText = s.correct;
+                currentTotal = s.correct;
+                possibleTotal = data.questions.length;
+            }
+
+            const percent = Math.round((currentTotal / possibleTotal) * 100) || 0;
+            document.getElementById('dash-percentage').innerText = `${percent}%`;
+
+            if (percent >= 80) fbText = "Masterful! You are fully prepared for this unit.";
+            else if (percent >= 60) fbText = "Solid effort. Review your weak spots to secure top grades.";
+            else if (percent > 0) fbText = "Keep training. Repetition builds lasting knowledge.";
+            document.getElementById('dash-feedback').innerText = fbText;
+        }
+
+        /** 
+         * ==========================================
+         * MIX & MATCH LOGIC
+         * ==========================================
+         */
+        function resetMatch() {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            s.matchCompleted = [];
+            s.matchBatchIndex = 0;
+            s.matchQs = shuffleArray([...data.match].map((m,i)=>({t:m.q, i})));
+            s.matchAs = shuffleArray([...data.match].map((m,i)=>({t:m.a, i})));
+            s.matchSelQ = null;
+            s.matchSelA = null;
+            renderMatch();
+            showToast("Terminology Match Reset", "ph-arrows-clockwise");
+        }
+
+        function renderMatch() {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+
+            document.getElementById('match-total').innerText = data.match.length;
+            document.getElementById('match-score').innerText = s.matchCompleted.length;
+            document.getElementById('match-batch-label').innerText = s.matchBatchIndex + 1;
+
+            if (s.matchCompleted.length === data.match.length) {
+                document.getElementById('match-grid').classList.add('hidden');
+                document.getElementById('match-complete').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('match-grid').classList.remove('hidden');
+                document.getElementById('match-complete').classList.add('hidden');
+            }
+
+            const qCont = document.getElementById('match-questions');
+            const aCont = document.getElementById('match-answers');
+            qCont.innerHTML = ''; aCont.innerHTML = '';
+
+            const startIdx = s.matchBatchIndex * 8;
+            const endIdx = startIdx + 8;
+            
+            const currentQs = s.matchQs.filter(item => item.i >= startIdx && item.i < endIdx);
+            const currentAs = s.matchAs.filter(item => item.i >= startIdx && item.i < endIdx);
+
+            currentQs.forEach(item => {
+                if(s.matchCompleted.includes(item.i)) return;
+                const isSel = s.matchSelQ === item.i;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl shadow-sm border-2 transition-all font-semibold ${isSel ? 'bg-emerald-50 border-emerald-500 scale-[1.02] text-emerald-700' : 'bg-white border-slate-200 hover:border-emerald-300 text-slate-700 hover:shadow-md'}`;
+                btn.innerText = item.t;
+                btn.onclick = () => handleMatchSelect('q', item.i, btn);
+                btn.id = `match-q-${item.i}`;
+                qCont.appendChild(btn);
+            });
+
+            currentAs.forEach(item => {
+                if(s.matchCompleted.includes(item.i)) return;
+                const isSel = s.matchSelA === item.i;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl shadow-sm border-2 transition-all font-medium ${isSel ? 'bg-blue-50 border-blue-500 scale-[1.02] text-blue-700' : 'bg-white border-slate-200 hover:border-blue-300 text-slate-600 hover:shadow-md'}`;
+                btn.innerText = item.t;
+                btn.onclick = () => handleMatchSelect('a', item.i, btn);
+                btn.id = `match-a-${item.i}`;
+                aCont.appendChild(btn);
+            });
+        }
+
+        function handleMatchSelect(type, idx, btn) {
+            const s = state[currentUnitId];
+            if (type === 'q') s.matchSelQ = s.matchSelQ === idx ? null : idx;
+            else s.matchSelA = s.matchSelA === idx ? null : idx;
+            
+            renderMatch(); 
+
+            if (s.matchSelQ !== null && s.matchSelA !== null) {
+                if (s.matchSelQ === s.matchSelA) {
+                    s.matchCompleted.push(s.matchSelQ);
+                    s.matchSelQ = null; s.matchSelA = null;
+                    updateStreakUI(true);
+                    
+                    const startIdx = s.matchBatchIndex * 8;
+                    const batchCompletedCount = s.matchCompleted.filter(id => id >= startIdx && id < startIdx + 8).length;
+                    
+                    if (batchCompletedCount === 8 && s.matchBatchIndex === 0 && APP_DATA[currentUnitId].match.length > 8) {
+                        setTimeout(() => {
+                            s.matchBatchIndex = 1;
+                            renderMatch();
+                        }, 600);
+                    } else if (s.matchCompleted.length === APP_DATA[currentUnitId].match.length) {
+                        setTimeout(() => {
+                            triggerLockedInOverlay();
+                            renderMatch();
+                        }, 600);
+                    } else {
+                        setTimeout(() => renderMatch(), 300);
+                    }
+                } else {
+                    const qBtn = document.getElementById(`match-q-${s.matchSelQ}`);
+                    const aBtn = document.getElementById(`match-a-${s.matchSelA}`);
+                    if(qBtn) qBtn.classList.add('animate-shake', 'bg-red-50', 'border-red-400', 'text-red-700');
+                    if(aBtn) aBtn.classList.add('animate-shake', 'bg-red-50', 'border-red-400', 'text-red-700');
+                    updateStreakUI(false);
+                    setTimeout(() => {
+                        s.matchSelQ = null; s.matchSelA = null;
+                        renderMatch();
+                    }, 500);
+                }
+            }
+        }
+
+        /** 
+         * ==========================================
+         * MCQ LOGIC
+         * ==========================================
+         */
+        function startMCQRetry() {
+            const s = state[currentUnitId];
+            s.mcqQueue = shuffleArray([...s.mcqRetryQueue]).map(q => {
+                const correctOptionText = q.options[q.ans];
+                const shuffledOptions = shuffleArray([...q.options]);
+                return { ...q, options: shuffledOptions, ans: shuffledOptions.indexOf(correctOptionText) };
+            });
+            s.mcqRetryQueue = [];
+            s.mcqActiveQuestion = s.mcqQueue[0];
+            renderMCQ();
+        }
+
+        function renderMCQ() {
+            const s = state[currentUnitId];
+            const q = s.mcqActiveQuestion;
+
+            document.getElementById('mcq-progress').innerText = `${s.mcqCorrect} / ${s.mcqTotal}`;
+
+            if (!q) {
+                document.getElementById('mcq-container').classList.add('hidden');
+                if (s.mcqRetryQueue.length > 0) {
+                    document.getElementById('mcq-retry-screen').classList.remove('hidden');
+                    document.getElementById('mcq-complete').classList.add('hidden');
+                    document.getElementById('mcq-retry-count').innerText = s.mcqRetryQueue.length;
+                } else {
+                    document.getElementById('mcq-retry-screen').classList.add('hidden');
+                    document.getElementById('mcq-complete').classList.remove('hidden');
+                }
+                return;
+            }
+
+            document.getElementById('mcq-container').classList.remove('hidden');
+            document.getElementById('mcq-complete').classList.add('hidden');
+            document.getElementById('mcq-retry-screen').classList.add('hidden');
+
+            document.getElementById('mcq-question').innerText = q.q;
+            const optionsContainer = document.getElementById('mcq-options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl border border-slate-600 transition-all font-medium text-lg bg-slate-700 hover:border-blue-400 hover:bg-slate-600 text-slate-200 shadow-sm`;
+                btn.innerText = opt;
+                btn.onclick = () => handleMCQSelect(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleMCQSelect(selIdx, btn) {
+            const s = state[currentUnitId];
+            const q = s.mcqActiveQuestion;
+            const isCorrect = selIdx === q.ans;
+            const allBtns = document.getElementById('mcq-options').children;
+
+            for(let i=0; i<allBtns.length; i++) {
+                allBtns[i].className = "w-full text-left p-4 rounded-xl border font-medium text-lg bg-slate-800 border-slate-700 text-slate-500 opacity-50 pointer-events-none";
+                if(i === selIdx) {
+                    if(isCorrect) allBtns[i].className = "w-full text-left p-4 rounded-xl border font-medium text-lg bg-emerald-900/30 border-emerald-500 text-emerald-400 pointer-events-none shadow-sm";
+                    else allBtns[i].className = "w-full text-left p-4 rounded-xl border font-medium text-lg bg-red-900/30 border-red-500 text-red-400 pointer-events-none animate-shake shadow-sm";
+                }
+                if(i === q.ans && !isCorrect) {
+                     allBtns[i].className = "w-full text-left p-4 rounded-xl border font-medium text-lg border-emerald-500/50 bg-slate-800 text-slate-300 border-dashed pointer-events-none";
+                }
+            }
+
+            s.mcqQueue.shift(); 
+            
+            if (isCorrect) {
+                s.mcqCorrect++;
+                updateStreakUI(true);
+                
+                if (s.mcqCorrect === s.mcqTotal && s.mcqQueue.length === 0) {
+                    setTimeout(() => triggerLockedInOverlay(), 500);
+                }
+            } else {
+                s.mcqRetryQueue.push(q);
+                updateStreakUI(false);
+            }
+
+            setTimeout(() => {
+                s.mcqActiveQuestion = s.mcqQueue.length > 0 ? s.mcqQueue[0] : null;
+                renderMCQ();
+            }, 1200);
+        }
+
+        /** 
+         * ==========================================
+         * LONG ANSWER LOGIC
+         * ==========================================
+         */
+        function renderLongAnswers() {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            const list = document.getElementById('long-list');
+            list.innerHTML = '';
+            
+            const index = s.longActiveIdx;
+            const item = data.long[index];
+            const hasMark = s.longScores[index] !== undefined;
+            
+            const div = document.createElement('div');
+            div.className = "bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 mb-6 animate-fade-in";
+            
+            let html = `
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                    <h4 class="font-bold text-slate-500 uppercase tracking-wider text-sm">Question ${index + 1} of ${data.long.length}</h4>
+                    <div class="flex gap-1">
+                        ${data.long.map((_, i) => `<div class="w-3 h-3 rounded-full ${i === index ? 'bg-amber-500 shadow-sm' : (s.longScores[i] !== undefined ? 'bg-emerald-400' : 'bg-slate-200')}"></div>`).join('')}
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h4 class="font-bold text-lg text-slate-800 leading-relaxed">${item.q}</h4>
+                </div>
+            `;
+
+            if (!hasMark) {
+                const savedText = s.longAnswersText[index] || '';
+                html += `
+                    <div class="relative mt-2">
+                        <textarea id="long-input-${index}" placeholder="Type or dictate your answer here..." class="w-full h-40 p-4 border-2 rounded-xl outline-none resize-none transition-colors border-slate-200 focus:border-amber-400 bg-slate-50 text-slate-700 text-base placeholder-slate-400">${savedText}</textarea>
+                        <button id="dictate-btn-${index}" onclick="toggleDictation(${index})" class="absolute bottom-4 right-4 p-3 rounded-full shadow-md transition-all bg-white text-slate-500 hover:text-amber-500 border border-slate-200" title="Dictate Answer">
+                            <i class="ph-fill ph-microphone text-xl"></i>
+                        </button>
+                    </div>
+                    <button onclick="submitLong(${index})" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+                        <i class="ph-bold ph-check-square-offset"></i> Submit & Reveal Perfect Answer
+                    </button>
+                `;
+            } else {
+                const userText = s.longAnswersText[index] || 'No answer provided.';
+                html += `
+                    <div class="bg-slate-50 p-5 rounded-xl mb-4 border border-slate-200">
+                        <div class="font-bold text-slate-500 mb-2 uppercase tracking-wider text-xs flex items-center gap-2">
+                            <i class="ph-fill ph-user text-lg"></i> Your Answer:
+                        </div>
+                        <div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed">${userText}</div>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-xl mb-6 border border-blue-200 shadow-inner">
+                        <div class="font-bold text-blue-700 mb-3 uppercase tracking-wider text-xs flex items-center gap-2">
+                            <i class="ph-fill ph-star text-lg"></i> Perfect Model Answer:
+                        </div>
+                        <div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed">${item.model}</div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center justify-between bg-white p-5 rounded-xl border border-slate-200 shadow-sm mb-6">
+                        <div class="mb-4 md:mb-0 text-center md:text-left">
+                            <span class="font-bold text-slate-800 block text-lg">Assess Your Answer</span>
+                            <span class="text-sm text-slate-500 font-medium">Read the model above. How many marks did you achieve?</span>
+                        </div>
+                        <div class="flex gap-2 flex-wrap justify-center">
+                            ${Array.from({length: item.maxMarks + 1}, (_, m) => `
+                                <button onclick="setLongScore(${index},${m})" class="w-12 h-12 rounded-xl font-bold text-lg transition-all shadow-sm ${s.longScores[index] === m ? 'bg-amber-500 text-white border-2 border-amber-600 scale-110 shadow-md' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-amber-600'}">
+                                    ${m}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                if (index < data.long.length - 1) {
+                    html += `
+                        <button onclick="nextLongQuestion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+                            Next Question <i class="ph-bold ph-arrow-right"></i>
+                        </button>
+                    `;
+                } else {
+                    html += `
+                        <button onclick="switchActivity('report')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+                            <i class="ph-bold ph-chart-bar"></i> View Dashboard
+                        </button>
+                    `;
+                }
+            }
+            div.innerHTML = html;
+            list.appendChild(div);
+        }
+
+        function nextLongQuestion() {
+            const s = state[currentUnitId];
+            s.longActiveIdx++;
+            renderLongAnswers();
+        }
+
+        function toggleDictation(idx) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showToast("Speech dictation is not supported in your browser.", "ph-warning");
+                return;
+            }
+
+            const btn = document.getElementById(`dictate-btn-${idx}`);
+            const input = document.getElementById(`long-input-${idx}`);
+
+            if (activeDictationId === idx && dictationRecognition) {
+                dictationRecognition.stop();
+                return;
+            }
+
+            if (dictationRecognition) dictationRecognition.stop();
+
+            dictationRecognition = new SpeechRecognition();
+            dictationRecognition.continuous = false;
+            dictationRecognition.interimResults = false;
+            dictationRecognition.lang = 'en-GB';
+
+            dictationRecognition.onstart = () => {
+                activeDictationId = idx;
+                btn.classList.add('animate-record'); 
+                showToast("Listening...", "ph-microphone");
+            };
+
+            dictationRecognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                input.value = input.value ? input.value + " " + transcript : transcript;
+                state[currentUnitId].longAnswersText[idx] = input.value;
+            };
+
+            dictationRecognition.onerror = (event) => {
+                showToast(`Audio Error: ${event.error}`, "ph-warning");
+            };
+
+            dictationRecognition.onend = () => {
+                activeDictationId = null;
+                btn.classList.remove('animate-record');
+            };
+
+            dictationRecognition.start();
+        }
+
+        function submitLong(idx) {
+            const input = document.getElementById(`long-input-${idx}`);
+            const text = input.value.trim();
+            if (text.length < 5) {
+                showToast("Please provide a longer answer before marking.", "ph-warning-circle");
+                return;
+            }
+            state[currentUnitId].longAnswersText[idx] = text;
+            state[currentUnitId].longScores[idx] = 0; 
+            renderLongAnswers();
+        }
+
+        function setLongScore(idx, score) {
+            state[currentUnitId].longScores[idx] = score;
+            renderLongAnswers(); 
+        }
+
+        /** 
+         * ==========================================
+         * MATHS SKILLS LOGIC
+         * ==========================================
+         */
+        function renderMaths() {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            const list = document.getElementById('maths-list');
+            list.innerHTML = '';
+            
+            document.getElementById('maths-score').nextSibling.textContent = ` / ${data.questions.length}`;
+            document.getElementById('maths-score').innerText = s.correct;
+
+            data.questions.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center";
+                
+                let html = `
+                    <div class="flex-1">
+                        <span class="font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded text-sm mr-2 border border-blue-200">Q${index + 1}</span>
+                        <span class="font-semibold text-slate-700">${item.q}</span>
+                        <div class="text-sm font-medium text-amber-600 bg-amber-50 border border-amber-200 p-2 rounded-lg mt-3 flex items-start gap-2">
+                            <i class="ph-bold ph-lightbulb mt-0.5"></i> <span>${item.hint}</span>
+                        </div>
+                    </div>
+                `;
+
+                if (!s.submitted[index]) {
+                    html += `
+                        <div class="w-full md:w-auto shrink-0 flex flex-row items-center gap-2 mt-3 md:mt-0">
+                            <input type="number" step="any" id="maths-input-${index}" placeholder="Answer" oninput="state['${currentUnitId}'].answers[${index}] = this.value" value="${s.answers[index] || ''}" class="w-full md:w-32 p-3 border-2 rounded-lg text-center font-bold outline-none border-slate-300 focus:border-blue-500 bg-white transition-colors">
+                            <button onclick="submitMaths(${index})" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-5 rounded-lg shadow-sm transition-colors whitespace-nowrap">
+                                Check
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    const uAns = s.answers[index] || '';
+                    const isCorrect = uAns.trim() === item.a;
+                    
+                    html += `
+                        <div class="w-full md:w-80 shrink-0 flex flex-col gap-2 mt-3 md:mt-0">
+                            <div class="flex items-center gap-2 w-full">
+                                <div class="w-full p-3 border-2 rounded-lg text-center font-bold ${isCorrect ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-red-500 bg-red-50 text-red-700'}">
+                                    ${uAns || '-'}
+                                </div>
+                                <i class="ph-fill ${isCorrect ? 'ph-check-circle text-emerald-500' : 'ph-x-circle text-red-500'} text-3xl shrink-0"></i>
+                            </div>
+                            <div class="text-xs bg-white p-3 rounded border border-slate-200 text-slate-600 font-medium whitespace-pre-line shadow-inner">
+                                <span class="font-bold text-blue-600 block mb-1">Correct Answer: ${item.a}</span>
+                                <span class="font-bold text-slate-700 block mb-1">Working:</span>${item.working}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                div.innerHTML = html;
+                list.appendChild(div);
+            });
+        }
+
+        function submitMaths(idx) {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            
+            const input = document.getElementById(`maths-input-${idx}`);
+            if (input) {
+                s.answers[idx] = input.value;
+            }
+            
+            s.submitted[idx] = true;
+            
+            const isCorrect = (s.answers[idx] || '').trim() === data.questions[idx].a;
+            if (isCorrect) {
+                s.correct++;
+                updateStreakUI(true);
+            } else {
+                updateStreakUI(false);
+            }
+            
+            renderMaths();
+            
+            const allSubmitted = data.questions.every((_, i) => s.submitted[i]);
+            if (allSubmitted) {
+                if (s.correct === data.questions.length) {
+                    showToast("Perfect calculations!", "ph-check-circle");
+                    triggerLockedInOverlay();
+                } else {
+                    showToast(`You scored ${s.correct}/${data.questions.length}. Review the workings.`, "ph-info");
+                }
+            }
+        }
+
+        /** 
+         * ==========================================
+         * SCORECARD MODALS
+         * ==========================================
+         */
+        function handleReportClick() {
+            document.getElementById('name-modal').classList.remove('hidden');
+            document.getElementById('name-modal').classList.add('flex');
+            document.getElementById('student-name-input').focus();
+        }
+
+        function closeNameModal() {
+            document.getElementById('name-modal').classList.add('hidden');
+            document.getElementById('name-modal').classList.remove('flex');
+        }
+
+        function saveNameAndShowScorecard() {
+            const input = document.getElementById('student-name-input');
+            const name = input.value.trim();
+            if (name) {
+                closeNameModal();
+                generateScorecard(name);
+            } else {
+                input.classList.add('border-red-500', 'animate-shake', 'bg-red-50');
+                setTimeout(() => input.classList.remove('animate-shake', 'border-red-500', 'bg-red-50'), 400);
+            }
+        }
+
+        function generateScorecard(name) {
+            const data = APP_DATA[currentUnitId];
+            const s = state[currentUnitId];
+            
+            document.getElementById('sc-name').innerText = name;
+            document.getElementById('sc-unit').innerText = data.title;
+            
+            let currentTotal = 0;
+            let possibleTotal = 0;
+
+            if (data.type === 'standard') {
+                document.getElementById('sc-standard-stats').classList.remove('hidden');
+                document.getElementById('sc-maths-stats').classList.add('hidden');
+                
+                document.getElementById('sc-match').innerText = s.matchCompleted.length;
+                document.getElementById('sc-total-match-display').innerText = `/ ${data.match.length}`;
+                
+                document.getElementById('sc-mcq').innerText = s.mcqCorrect;
+                document.getElementById('sc-total-mcq').innerText = s.mcqTotal;
+                
+                currentTotal += s.matchCompleted.length + s.mcqCorrect;
+                possibleTotal += data.match.length + s.mcqTotal;
+                
+                let longCurrent = 0;
+                let longMax = 0;
+                data.long.forEach((l, i) => {
+                    longCurrent += (s.longScores[i] || 0);
+                    longMax += l.maxMarks;
+                });
+                document.getElementById('sc-long').innerText = longCurrent;
+                document.getElementById('sc-total-long').innerText = longMax;
+                
+                currentTotal += longCurrent;
+                possibleTotal += longMax;
+            } else {
+                document.getElementById('sc-standard-stats').classList.add('hidden');
+                document.getElementById('sc-maths-stats').classList.remove('hidden');
+                
+                document.getElementById('sc-maths').innerText = s.correct;
+                currentTotal = s.correct;
+                possibleTotal = data.questions.length;
+            }
+
+            const percent = Math.round((currentTotal / possibleTotal) * 100) || 0;
+            document.getElementById('sc-total').innerText = currentTotal;
+            document.getElementById('sc-max').innerText = possibleTotal;
+            document.getElementById('sc-percent').innerText = percent;
+            
+            const now = new Date();
+            document.getElementById('sc-timestamp').innerText = `${now.toLocaleDateString()} at ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+            document.getElementById('scorecard-modal').classList.remove('hidden');
+            document.getElementById('scorecard-modal').classList.add('flex');
+        }
+
+        function closeScorecard() {
+            document.getElementById('scorecard-modal').classList.add('hidden');
+            document.getElementById('scorecard-modal').classList.remove('flex');
+        }
+
+        // Initialize App on Window Load
+        window.onload = () => {
+            initState();
+        };
+    </script>
+</body>
+</html>
