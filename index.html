@@ -224,7 +224,7 @@ AQA Triple Biology <span class="text-emerald-600 block sm:inline">Paper 1</span>
 <h3 class="font-heading text-2xl font-bold text-slate-800 flex items-center gap-2"><i class="ph-fill ph-pen-nib text-amber-500"></i> The Book of Knowledge</h3>
 <p class="text-slate-500 text-sm mt-1">Type or dictate your answers. Mark yourself honestly against the perfect model to secure your score.</p>
 </div>
-<div id="long-list" class="space-y-8"></div>
+<div id="long-list" class="space-y-8 pb-24"></div>
 </div>
 
 <!-- 4. Maths Skills -->
@@ -310,7 +310,7 @@ AQA Triple Biology <span class="text-emerald-600 block sm:inline">Paper 1</span>
 
 <!-- SCORECARD MODAL -->
 <div id="scorecard-modal" class="fixed inset-0 bg-slate-900/80 z-[60] hidden items-center justify-center p-4 backdrop-blur-sm">
-<div class="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl relative border-t-8 border-emerald-500 max-h-[95vh] overflow-y-auto animate-fade-in">
+<div class="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl relative border-t-8 border-emerald-500 max-h-[90vh] overflow-y-auto animate-fade-in">
 <button onclick="closeScorecard()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
 <i class="ph-fill ph-x-circle text-3xl"></i>
 </button>
@@ -379,7 +379,7 @@ AQA Triple Biology <span class="text-emerald-600 block sm:inline">Paper 1</span>
 
 <!-- MASTER CUMULATIVE SCORECARD MODAL -->
 <div id="master-scorecard-modal" class="fixed inset-0 bg-slate-900/80 z-[60] hidden items-center justify-center p-4 backdrop-blur-sm">
-<div class="bg-white p-6 sm:p-8 rounded-2xl max-w-lg w-full shadow-2xl relative border-t-8 border-amber-500 max-h-[95vh] overflow-y-auto animate-fade-in">
+<div class="bg-white p-6 sm:p-8 rounded-2xl max-w-lg w-full shadow-2xl relative border-t-8 border-amber-500 max-h-[90vh] overflow-y-auto animate-fade-in">
 <button onclick="closeMasterScorecardModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
 <i class="ph-fill ph-x-circle text-3xl"></i>
 </button>
@@ -1173,7 +1173,7 @@ const index = s.longActiveIdx;
 const item = data.long[index];
 const hasMark = s.longScores[index] !== undefined;
 const div = document.createElement('div');
-div.className = "bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 mb-6 animate-fade-in";
+div.className = "bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 mb-6 animate-fade-in max-h-[80vh] overflow-y-auto scrollbar-hide";
 let html = `
 <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
 <h4 class="font-bold text-slate-500 uppercase tracking-wider text-sm">Question ${index + 1} of ${data.long.length}</h4>
@@ -1190,38 +1190,38 @@ if (!hasMark) {
 const savedText = s.longAnswersText[index] || '';
 html += `
 <div class="relative mt-2">
-<textarea id="long-input-${index}" placeholder="Type or dictate your answer here..." class="w-full h-40 p-4 border-2 rounded-xl outline-none resize-none transition-colors border-slate-200 focus:border-amber-400 bg-slate-50 text-slate-700 text-base placeholder-slate-400">${savedText}</textarea>
+<textarea id="long-input-${index}" placeholder="Type or dictate your answer here..." class="w-full h-36 p-4 border-2 rounded-xl outline-none resize-none transition-colors border-slate-200 focus:border-amber-400 bg-slate-50 text-slate-700 text-base placeholder-slate-400">${savedText}</textarea>
 <button id="dictate-btn-${index}" onclick="toggleDictation(${index})" class="absolute bottom-4 right-4 p-3 rounded-full shadow-md transition-all bg-white text-slate-500 hover:text-amber-500 border border-slate-200" title="Dictate Answer">
 <i class="ph-fill ph-microphone text-xl"></i>
 </button>
 </div>
-<button onclick="submitLong(${index})" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+<button onclick="submitLong(${index})" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg mb-4">
 <i class="ph-bold ph-check-square-offset"></i> Submit & Reveal Perfect Answer
 </button>
 `;
 } else {
 const userText = s.longAnswersText[index] || 'No answer provided.';
 html += `
-<div class="bg-slate-50 p-5 rounded-xl mb-4 border border-slate-200">
+<div class="bg-slate-50 p-4 rounded-xl mb-4 border border-slate-200 max-h-40 overflow-y-auto">
 <div class="font-bold text-slate-500 mb-2 uppercase tracking-wider text-xs flex items-center gap-2">
 <i class="ph-fill ph-user text-lg"></i> Your Answer:
 </div>
-<div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed">${userText}</div>
+<div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed text-sm">${userText}</div>
 </div>
-<div class="bg-blue-50 p-6 rounded-xl mb-6 border border-blue-200 shadow-inner">
-<div class="font-bold text-blue-700 mb-3 uppercase tracking-wider text-xs flex items-center gap-2">
+<div class="bg-blue-50 p-4 rounded-xl mb-6 border border-blue-200 shadow-inner max-h-48 overflow-y-auto">
+<div class="font-bold text-blue-700 mb-2 uppercase tracking-wider text-xs flex items-center gap-2">
 <i class="ph-fill ph-star text-lg"></i> Perfect Model Answer:
 </div>
-<div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed">${item.model}</div>
+<div class="text-slate-700 whitespace-pre-line font-medium leading-relaxed text-sm">${item.model}</div>
 </div>
-<div class="flex flex-col md:flex-row items-center justify-between bg-white p-5 rounded-xl border border-slate-200 shadow-sm mb-6">
-<div class="mb-4 md:mb-0 text-center md:text-left">
-<span class="font-bold text-slate-800 block text-lg">Assess Your Answer</span>
-<span class="text-sm text-slate-500 font-medium">Read the model above. How many marks did you achieve?</span>
+<div class="flex flex-col md:flex-row items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-6">
+<div class="mb-3 md:mb-0 text-center md:text-left">
+<span class="font-bold text-slate-800 block text-base">Assess Your Answer</span>
+<span class="text-xs text-slate-500 font-medium">Read the model above. How many marks did you achieve?</span>
 </div>
 <div class="flex gap-2 flex-wrap justify-center">
 ${Array.from({length: item.maxMarks + 1}, (_, m) => `
-<button onclick="setLongScore(${index},${m})" class="w-12 h-12 rounded-xl font-bold text-lg transition-all shadow-sm ${s.longScores[index] === m ? 'bg-amber-500 text-white border-2 border-amber-600 scale-110 shadow-md' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-amber-600'}">
+<button onclick="setLongScore(${index},${m})" class="w-11 h-11 rounded-xl font-bold text-base transition-all shadow-sm ${s.longScores[index] === m ? 'bg-amber-500 text-white border-2 border-amber-600 scale-110 shadow-md' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-amber-600'}">
 ${m}
 </button>
 `).join('')}
@@ -1231,13 +1231,13 @@ ${m}
 
 if (index < data.long.length - 1) {
 html += `
-<button onclick="nextLongQuestion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+<button onclick="nextLongQuestion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-base mb-4">
 Next Question <i class="ph-bold ph-arrow-right"></i>
 </button>
 `;
 } else {
 html += `
-<button onclick="switchActivity('report')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-lg">
+<button onclick="switchActivity('report')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-base mb-4">
 <i class="ph-bold ph-chart-bar"></i> View Dashboard
 </button>
 `;
